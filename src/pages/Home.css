@@ -1,0 +1,7 @@
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Optional: Set the width to span the entire page */
+    /* Add other styles for your footer, like background color, padding, etc. */
+  }

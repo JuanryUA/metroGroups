@@ -25,29 +25,18 @@ export default function Footer() {
 
       <AppBar position="static">
         <Toolbar >
- 
-          <Button
-            variant='text'
-          >
-            <img src={ULogo} alt="my image"  /></Button>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >mas informacion
-            <AddIcon />
-          </IconButton>
-
-            <Button variant='contained' sx={{mr : 2}}>
-                Iniciar Sesion
-            </Button>
-            <Button variant='contained' sx={{mr : 2}}>
-                Registrarse
-            </Button>
+            <Box flexGrow={1}>
+                Copyright 2024 - Universidad Metropolitana 
+                Todos los derechos reservados
+            </Box>
+          <IconButton aria-label='user' sx={{mr : 2}}>
+                <Avatar>X</Avatar>
+            </IconButton>
             <IconButton aria-label='user' sx={{mr : 2}}>
-                <Avatar>J</Avatar>
+                <Avatar>I</Avatar>
+            </IconButton>
+            <IconButton aria-label='user' sx={{mr : 2}}>
+                <Avatar>F</Avatar>
             </IconButton>
 
 
