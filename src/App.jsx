@@ -5,8 +5,11 @@ import './App.css'
 import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
 import About from './pages/About'
-import Conctact from './pages/Contact'
+import Agrupacion from './pages/Agrupacion'
 import NoPage from './pages/NoPage'
+import Header from './components/Header'
+import NavBar from './layouts/NavBar'
+import Footer from './layouts/Footer'
 
 function App() {
 
@@ -14,15 +17,19 @@ function App() {
   return (
     <>
       <div>
+        
         <BrowserRouter>
+        <NavBar/>
           <Routes>
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
-            <Route path="/contact" element={<Conctact />}></Route>
+            <Route path="/agrupacion" element={<Agrupacion />}></Route>
             <Route path="*" element={<NoPage />}></Route>
           </Routes>
+          <Footer/>
         </BrowserRouter>
+        
       </div>
     </>
   )

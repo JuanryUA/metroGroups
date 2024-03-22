@@ -1,10 +1,10 @@
 import Header from "../components/Header";
 
-export default function Conctact () {
+export default function Agrupacion () {
     return (
         <>
             <Header/>
-            <h2>Conctact</h2>
+            <h2>Agrupacion</h2>
         </>
     )
     

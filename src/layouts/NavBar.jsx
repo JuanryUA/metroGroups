@@ -12,18 +12,19 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
-
-
-
-
 import ULogo from "../assets/Logo-footer.png";
+const StyledButton = styled(Button)`
+margin-right : 8px; 
+background-color: #FDA403;  
+&:hover {
+  background-color: #222831`
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
+  backgroundColor: alpha(theme.palette.common.white, 1),
   '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.10),
   },
   marginLeft: 0,
   width: '100%',
@@ -31,6 +32,7 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(1),
     width: 'auto',
   },
+  color: "black"
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -41,6 +43,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  color: "black"
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -64,7 +67,7 @@ export default function SearchAppBar() {
   return (
 
       <AppBar position="static">
-        <Toolbar >
+        <Toolbar sx={{backgroundColor: "#FFEDD8"}}>
  
           <Button
             variant='text'
@@ -76,8 +79,10 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
-          >mas informacion
-            <AddIcon />
+          ><Typography sx={{color : "black"}}>
+            Mas informacion
+          </Typography>
+            <AddIcon sx={{color : "black"}} />
           </IconButton>
           <Search sx={{mr : 2, flexGrow: 1}}>
             <SearchIconWrapper>
@@ -89,12 +94,12 @@ export default function SearchAppBar() {
             />
           </Search> 
 
-            <Button variant='contained' sx={{mr : 2}}>
+            <StyledButton variant='contained'>
                 Iniciar Sesion
-            </Button>
-            <Button variant='contained' sx={{mr : 2}}>
+            </StyledButton>
+            <StyledButton variant='contained'>
                 Registrarse
-            </Button>
+            </StyledButton>
             <IconButton aria-label='user' sx={{mr : 2}}>
                 <Avatar>J</Avatar>
             </IconButton>

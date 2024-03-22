@@ -23,8 +23,8 @@ import ULogo from "../assets/Logo-footer.png";
 export default function Footer() {
   return (
 
-      <AppBar position="static">
-        <Toolbar >
+
+        <Toolbar sx={{ mt : 4, backgroundColor: "#FFC374"}}>
             <Box flexGrow={1}>
                 Copyright 2024 - Universidad Metropolitana 
                 Todos los derechos reservados
@@ -41,7 +41,6 @@ export default function Footer() {
 
 
         </Toolbar>
-      </AppBar>
 
   );
 }
