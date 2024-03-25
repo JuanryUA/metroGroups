@@ -1,0 +1,99 @@
+/* AgruAfiliado.css */
+
+.AgruAfiliado {
+    text-align: center;
+}
+
+.top-block {
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.left-bottom-block, .right-bottom-block {
+    width: 48%;
+}
+.username {
+    align-self: flex-start;
+    margin-bottom: 0px;
+}
+.left-bottom-block {
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    background-color: #fcd9bd;
+    border-top-right-radius: 10%;
+}
+
+.right-bottom-block {
+    padding: 20px;
+    border-top-left-radius: 10%;
+    background-color: #ffa742;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.comments-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0px;
+    margin-top: 20px;
+    padding: 10px 10px; 
+    background-color: #ff8800;
+}
+
+.username {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: larger;
+}
+
+
+.comment-field {
+    display: flex;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: whitesmoke;
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.paypal-button {
+    width: 250px;
+    height: 250px;
+    background-image: url('../assets/paypalbutton.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    transition: opacity 0.3s ease; /* Añade una transición suave */
+}
+
+.paypal-button:hover {
+    opacity: 0.5; /* Cambia la opacidad al pasar el cursor por encima */
+}
