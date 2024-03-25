@@ -13,6 +13,10 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
 import ULogo from "../assets/Logo-footer.png";
+
+
+
+
 const StyledButton = styled(Button)`
 margin-right : 8px; 
 background-color: #FDA403;  
@@ -62,6 +66,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
+
+
 
 export default function SearchAppBar() {
   return (
