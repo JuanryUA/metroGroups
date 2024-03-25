@@ -26,8 +26,8 @@ function Agrupacion() {
                 <div className="centered-content">
                     <div className="additional-info">
                         <div className="info-block orange-background">
-                            <h3>Propósito</h3>
-                            <p>Descripción del propósito de la agrupación.</p>
+                            <h3>Visión</h3>
+                            <p>Descripción de la visión de la agrupación.</p>
                         </div>
                         <div className="info-block orange-background">
                             <h3>Misión</h3>

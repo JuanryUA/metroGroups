@@ -8,6 +8,9 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    background-image: url('../assets/Wavy_Background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .left-block {
@@ -20,7 +23,7 @@ body {
 }
 
 .centered-content {
-    align-self: flex-end;
+    align-self: center;
     text-align: left;
 }
 
@@ -89,7 +92,6 @@ body {
 }
 
 .orange-button button {
-
     background-color: #ff9800; /* Cambiado a un tono de naranja más brillante */
     color: #fff; /* Cambiado a blanco para un contraste más alto */
     padding: 12px 24px;
@@ -129,7 +131,7 @@ h1 {
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap; /* Añadido para permitir que los bloques de información se envuelvan si no hay suficiente espacio */
-    align-self: flex-end;
+    align-self: center;
 }
 
 .info-block {
