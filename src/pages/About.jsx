@@ -21,6 +21,8 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import Avatar from '@mui/material/Avatar';
+import { Link } from "react-router-dom";
+import { StyledButtonGroup } from "@mui/joy/ButtonGroup/ButtonGroup";
 
 const StyledListItem = styled(ListItemText)`
 text-align : center`
@@ -36,9 +38,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function About() {
   return (
+    
+     
     <Box sx={{ flexGrow: 1 , mt : 2}}>
+      
       <Grid container spacing={2}>
         <Grid xs={4}>
+       
           <Item>
             <Card>
                 <CardMedia>
@@ -113,7 +119,10 @@ export default function About() {
           </Item>
         </Grid>
       </Grid>
+
     </Box>
+
+  
   );
 }
 

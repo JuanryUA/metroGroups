@@ -11,6 +11,7 @@ import NoPage from './pages/NoPage'
 import Header from './components/Header'
 import NavBar from './layouts/NavBar'
 import Footer from './layouts/Footer'
+import Profile from './pages/Profile'
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
             <Route path="/agrupacion" element={<Agrupacion />}></Route>
             <Route path="/afiliado" element={<AgruAfiliado />}></Route>
             <Route path="*" element={<NoPage />}></Route>
+            <Route path="/profile" element={<Profile/>}></Route>
+            
           </Routes>
           <Footer/>
         </BrowserRouter>
