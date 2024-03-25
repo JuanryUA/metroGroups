@@ -77,6 +77,7 @@ export default function SearchAppBar() {
  
           <Button
             variant='text'
+            href='/home'
           >
             <img src={ULogo} alt="my image"  /></Button>
           <IconButton
@@ -85,6 +86,7 @@ export default function SearchAppBar() {
             color="inherit"
             aria-label="open drawer"
             sx={{ mr: 2 }}
+            href='/about'
           ><Typography sx={{color : "black"}}>
             Mas informacion
           </Typography>

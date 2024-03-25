@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom"
 import Home from './pages/Home'
 import About from './pages/About'
 import Agrupacion from './pages/Agrupacion'
+import AgruAfiliado from './pages/AgruAfiliado'
 import NoPage from './pages/NoPage'
 import Header from './components/Header'
 import NavBar from './layouts/NavBar'
@@ -25,6 +26,7 @@ function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
             <Route path="/agrupacion" element={<Agrupacion />}></Route>
+            <Route path="/afiliado" element={<AgruAfiliado />}></Route>
             <Route path="*" element={<NoPage />}></Route>
           </Routes>
           <Footer/>
