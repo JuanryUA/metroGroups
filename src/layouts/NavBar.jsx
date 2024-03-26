@@ -14,6 +14,7 @@ import Stack from "@mui/material/Stack";
 import AddIcon from "@mui/icons-material/Add";
 import ULogo from "../assets/Logo-footer.png";
 import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const StyledButton = styled(Button)`
 margin-right : 8px; 
@@ -66,6 +67,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchAppBar() {
+  const navegar = useNavigate();
+  
   return (
     <AppBar position="static">
       <Toolbar sx={{ backgroundColor: "#FFEDD8" }}>
@@ -92,9 +95,8 @@ export default function SearchAppBar() {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-
-        <StyledButton variant="contained">Iniciar Sesion</StyledButton>
-        <StyledButton variant="contained">Registrarse</StyledButton>
+        <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesion</StyledButton>
+        <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
         <IconButton aria-label="user" sx={{ mr: 2 }}>
           <Link to="/profile" style={{ textDecoration: 'none' }}>
             <Avatar>J</Avatar>
