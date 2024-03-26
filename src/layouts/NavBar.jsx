@@ -1,27 +1,32 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
 import ULogo from "../assets/Logo-footer.png";
 
-
-
+export const agrupaciones = [
+  { nombre: "alejo", descripcion: "no saluda1" },
+  { nombre: "bubin", descripcion: "no saluda2" },
+  { nombre: "reaper", descripcion: "no saluda3" },
+  { nombre: "uco", descripcion: "no saluda4" },
+  { nombre: "doc", descripcion: "no saluda5" },
+  { nombre: "test", descripcion: "no saluda6" }
+];
 
 const StyledButton = styled(Button)`
-margin-right : 8px; 
-background-color: #FDA403;  
-&:hover {
-  background-color: #222831`
+  margin-right: 8px; 
+  background-color: #FDA403;  
+  &:hover {
+    background-color: #222831;
+  }
+`;
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -55,7 +60,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: '100%',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
     [theme.breakpoints.up('sm')]: {
@@ -67,54 +71,64 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-
-
 export default function SearchAppBar() {
-  return (
+  const [searchTerm, setSearchTerm] = useState('');
 
-      <AppBar position="static">
-        <Toolbar sx={{backgroundColor: "#FFEDD8"}}>
- 
-          <Button
-            variant='text'
-            href='/home'
-          >
-            <img src={ULogo} alt="my image"  /></Button>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-            href='/about'
-          ><Typography sx={{color : "black"}}>
+  const handleSearch = () => {
+    let found = false;
+
+    for (const agrupacion of agrupaciones) {
+      if (
+        agrupacion.nombre.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
+        agrupacion.descripcion.toLowerCase().includes(searchTerm.trim().toLowerCase())
+      ) {
+        found = true;
+        break; 
+      }
+    }
+
+    if (found) {
+      alert('Si existe la agrupacion');
+    } else {
+      alert('No existe');
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  return (
+    <AppBar position="static">
+      <Toolbar sx={{ backgroundColor: "#FFEDD8" }}>
+        <Button variant='text' href='/home'>
+          <img src={ULogo} alt="my image" />
+        </Button>
+        <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} href='/about'>
+          <Typography sx={{ color: "black" }}>
             Mas informacion
           </Typography>
-            <AddIcon sx={{color : "black"}} />
-          </IconButton>
-          <Search sx={{mr : 2, flexGrow: 1}}>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search> 
-
-            <StyledButton variant='contained'>
-                Iniciar Sesion
-            </StyledButton>
-            <StyledButton variant='contained'>
-                Registrarse
-            </StyledButton>
-            <IconButton aria-label='user' sx={{mr : 2}}>
-                <Avatar>J</Avatar>
-            </IconButton>
-
-
-        </Toolbar>
-      </AppBar>
-
+          <AddIcon sx={{ color: "black" }} />
+        </IconButton>
+        <Search sx={{ mr: 2, flexGrow: 1 }}>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ 'aria-label': 'search', onKeyDown: handleKeyPress }}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </Search>
+        <StyledButton variant='contained'>Iniciar Sesion</StyledButton>
+        <StyledButton variant='contained'>Registrarse</StyledButton>
+        <IconButton aria-label='user' sx={{ mr: 2 }}>
+          <Avatar>J</Avatar>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 }

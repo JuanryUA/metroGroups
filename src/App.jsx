@@ -18,7 +18,6 @@ function App() {
   return (
     <>
       <div>
-        
         <BrowserRouter>
         <NavBar/>
           <Routes>
