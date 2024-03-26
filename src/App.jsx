@@ -11,6 +11,9 @@ import NoPage from './pages/NoPage'
 import Header from './components/Header'
 import NavBar from './layouts/NavBar'
 import Footer from './layouts/Footer'
+import Admin from './pages/Admin'
+import InicioSesion from './pages/InicioSesion'
+import Registrarse from './pages/Registrarse'
 
 function App() {
 
@@ -26,10 +29,14 @@ function App() {
             <Route path="/about" element={<About />}></Route>
             <Route path="/agrupacion" element={<Agrupacion />}></Route>
             <Route path="/afiliado" element={<AgruAfiliado />}></Route>
+            <Route path= "/admin" element={<Admin />}></Route>
             <Route path="*" element={<NoPage />}></Route>
+            <Route path="/login" element={<InicioSesion />}></Route>
+            <Route path="/register" element={<Registrarse />}></Route>
           </Routes>
           <Footer/>
         </BrowserRouter>
+
         
       </div>
     </>
