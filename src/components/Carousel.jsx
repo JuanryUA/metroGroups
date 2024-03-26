@@ -33,6 +33,9 @@ export default function Carousel() {
         
     
             <AgrupacionCard nombre="test" descripcion="no saluda"></AgrupacionCard>
+
+            
+
         
       </Slider>
     );
