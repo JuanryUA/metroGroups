@@ -34,7 +34,7 @@ form p {
 }
 
 form input {
-    width: 100%;
+    width: 400px;
     height: 30px;
     margin-bottom: 10px; 
     padding: 10px;
@@ -96,3 +96,8 @@ hr {
     background-size: cover;
     background-position: center;
 }
+
+.error {
+    color: red;
+    font-size: 14px;
+  }
