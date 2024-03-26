@@ -95,7 +95,6 @@ export default function SearchAppBar() {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
-
         <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesion</StyledButton>
         <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
         <IconButton aria-label="user" sx={{ mr: 2 }}>
