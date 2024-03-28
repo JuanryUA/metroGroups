@@ -26,7 +26,7 @@ function App() {
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
-            <Route path="/agrupacion" element={<Agrupacion />}></Route>
+            <Route path="/agrupacion/:codigo" element={<Agrupacion />} />
             <Route path="/afiliado" element={<AgruAfiliado />}></Route>
             <Route path="/admin" element={<Admin />}></Route>
             <Route path="*" element={<NoPage />}></Route>
