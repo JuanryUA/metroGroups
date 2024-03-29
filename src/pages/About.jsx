@@ -1,13 +1,10 @@
 import Header from "../components/Header";
-
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
-
-
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -24,8 +21,10 @@ import Avatar from '@mui/material/Avatar';
 import { Link } from "react-router-dom";
 import { StyledButtonGroup } from "@mui/joy/ButtonGroup/ButtonGroup";
 
-const StyledListItem = styled(ListItemText)`
-text-align : center`
+
+const StyledListItemText = styled('div')`
+  text-align: center;
+`;
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -36,7 +35,18 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
+const agrupaciones = [
+  { codigo: '0dveVmDq7hPvl2cCgF0P', nombre: 'ARCA' },
+  { codigo: 'RJLHoL9lAp9naAsirSMl', nombre: 'Ensamble afro-venezolano' },
+  { codigo: 'gLrrRL5Dz8xznwpGlKZp', nombre: 'MetroTech' },
+];
+
 export default function About() {
+  const handleAgrupacionClick = (codigo) => {
+    // Redirige a la página de Agrupación con el código correspondiente
+    console.log(`Redirigiendo a la agrupación con código: ${codigo}`);
+  };
+
   return (
     
      
@@ -92,24 +102,20 @@ export default function About() {
                         component="nav"
                         aria-labelledby="nested-list-subheader"
                         >
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Avatar>A</Avatar>
-                                </ListItemIcon>
-                                    <StyledListItem primary="ARCA" />
-                            </ListItemButton>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Avatar>P</Avatar>
-                                </ListItemIcon>
-                                    <StyledListItem primary="PADEL" />
-                            </ListItemButton>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <Avatar>F1</Avatar>
-                                </ListItemIcon>
-                                    <StyledListItem primary="FORMULA" />
-                            </ListItemButton>
+                            {agrupaciones.map((agrupacion) => (
+                              <ListItemButton 
+                                key={agrupacion.codigo} 
+                                component={Link} 
+                                to={`/agrupacion/${agrupacion.codigo}`}
+                                sx={{ display: 'flex', alignItems: 'center' }} // Añade estos estilos
+                              >
+                                {/* Utiliza Link para manejar la redirección */}
+                                <Avatar>{agrupacion.nombre.charAt(0)}</Avatar>
+                                <Box sx={{ margin: 'auto' }}> {/* Contenedor adicional para el texto */}
+                                  <StyledListItemText>{agrupacion.nombre}</StyledListItemText>
+                                </Box>
+                              </ListItemButton>
+                            ))}
                     </List>
                 </CardContent>
                 <CardActions>

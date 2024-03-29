@@ -14,9 +14,14 @@ import Footer from "./layouts/Footer";
 import Admin from "./pages/Admin";
 import InicioSesion from "./pages/InicioSesion";
 import Registrarse from "./pages/Registrarse";
-import Profile from "./pages/Profile";
+import PerfilUsuario from "./pages/PerfilUsuario"
+import Editar from "./pages/Editar";
 
 function App() {
+
+  
+
+
   return (
     <>
       <div>
@@ -26,13 +31,15 @@ function App() {
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
-            <Route path="/agrupacion" element={<Agrupacion />}></Route>
+            <Route path="/agrupacion/:codigo" element={<Agrupacion />} />
             <Route path="/afiliado" element={<AgruAfiliado />}></Route>
             <Route path="/admin" element={<Admin />}></Route>
             <Route path="*" element={<NoPage />}></Route>
             <Route path="/login" element={<InicioSesion />}></Route>
             <Route path="/register" element={<Registrarse />}></Route>
-            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/profile" element={<PerfilUsuario />}></Route>
+            <Route path="/edit-user" element={<Editar tipo='user'/>}></Route>
+            <Route path="/edit-agrupacion" element={<Editar tipo='agrupacion'/>}></Route>
           </Routes>
           <Footer />
         </BrowserRouter>
