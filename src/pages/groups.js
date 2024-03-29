@@ -11,6 +11,5 @@ export async function getGroupsArray(){
         })
     })
     
-    console.log(agrupaciones)
     return agrupaciones
 }
