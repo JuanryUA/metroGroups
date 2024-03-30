@@ -46,6 +46,7 @@
 .seccion2 {
   display: flex;
   justify-content: space-around;
+ 
 }
 
 .seccion1 {
@@ -89,4 +90,5 @@
 .seccion3 {
   display: flex;
   justify-content: center;
+  
 }

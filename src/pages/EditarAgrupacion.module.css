@@ -1,0 +1,86 @@
+.subcontainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  background-image: url("https://lavoceditalia.com/wp-content/uploads/2021/04/DSC09228.jpg");
+}
+
+.box {
+  display: flex;
+  justify-content: space-around;
+  background-color: #deab75cf;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 2%;
+  border-radius: 12px;
+  width: 75%;
+  height: 95%;
+  box-shadow: 0px 4px 12px gray;
+  padding: 50px;
+}
+
+button {
+  background: none;
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: medium;
+  ;
+}
+
+button:hover {
+  background-color: rgba(50, 46, 46, 0.877);
+  color: rgba(226, 194, 15, 0.879);
+  cursor: pointer;
+}
+
+button:focus {
+  font-weight: bolder;
+  background: rgba(0, 0, 0, 0.726);
+  color: white;
+  
+}
+
+.Button button {
+    background-color: rgba(0, 0, 0, 0.731);
+    margin: 5%;
+    padding: 30px;
+    color: white;
+    border-radius: 8px;
+    border:2px solid orange;
+}
+
+.seccion1 {
+  display: grid;
+  justify-content: space-around;
+}
+
+.seccion2 {
+  width: 300px;
+  height: 200px;
+  background-color: rgba(63, 15, 15, 0.591);
+  border-radius: 8px;
+  padding: 3%;
+  color: rgba(255, 255, 255, 0.749);
+
+}
+
+.form textarea {
+  width: 350px;
+  height: 227px;
+  color: rgba(255, 255, 255, 0.749);
+  border-radius: 8px;
+  padding: 3%;
+  border: none;
+  background-color: rgba(63, 15, 15, 0.591);
+}
+
+.Button {
+  display: flex;
+  justify-content: center;
+}

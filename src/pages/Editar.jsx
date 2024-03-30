@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./PerfilUsuarioEdit.module.css";
+import estilos from "./EditarAgrupacion.module.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../user.js";
-import { collection, doc } from 'firebase/firestore'
-import { db } from './firebase.js'
-import { updateDoc } from 'firebase/firestore'
-
+import { collection, doc } from "firebase/firestore";
+import { db } from "./firebase.js";
+import { updateDoc } from "firebase/firestore";
+import { useEffect } from "react";
+import { getFirestore, getDoc, onSnapshot } from "firebase/firestore";
 
 export default function Editar(props) {
   if (props.tipo == "user") {
@@ -17,25 +19,163 @@ export default function Editar(props) {
 }
 
 function EditarAgrupacion() {
-  return <div>agrupacion</div>;
+  const IdAgrupacion = "gLrrRL5Dz8xznwpGlKZp";
+  const [data, setData] = useState();
+  const navegar = useNavigate();
+  const [update, setUpdate] = useState("");
+  const [campoActualizado, setCampoActualizado] = useState("");
+
+  const [informacion, setInformacion] = useState("");
+
+  const Enviar = (event) => {
+    if (validarEntradas("texto", update)) {
+      switch (campoActualizado) {
+        case "nombre":
+          ActualizarBase({ nombre: update }, IdAgrupacion, "agrupacion");
+          alert("Hecho!!");
+        
+          break;
+        case "mision":
+          ActualizarBase({ mision: update }, IdAgrupacion, "agrupacion");
+          alert("Hecho!!");
+          break;
+        case "vision":
+          ActualizarBase({ vision: update }, IdAgrupacion, "agrupacion");
+          alert("Hecho!!");
+          break;
+        case "objetivos":
+          ActualizarBase({ objetivos: update }, IdAgrupacion, "agrupacion");
+          alert("Hecho!!");
+          break;
+        case "clasificacion":
+          ActualizarBase({ clasificacion: update }, IdAgrupacion, "agrupacion");
+          alert("Hecho!!");
+          break;
+        case "contacto":
+          ActualizarBase({ contacto: update }, IdAgrupacion, "agrupacion");
+          alert("Hecho!!");
+          break;
+      }
+      
+      setInformacion(update);
+     
+    } else {
+      alert("error");
+    }
+    
+  };
+
+  function Seleccion(buttonText) {
+    switch (buttonText) {
+      case "Mision":
+        setCampoActualizado("mision");
+        setInformacion(data?.mision);
+        break;
+      case "Vision":
+        setCampoActualizado("vision");
+        setInformacion(data?.vision);
+        break;
+      case "Objetivos":
+        setCampoActualizado("objetivos");
+        setInformacion(data?.objetivos);
+        break;
+      case "Contacto":
+        setCampoActualizado("contacto");
+        setInformacion(data?.contacto);
+        break;
+      case "Nombre":
+        setCampoActualizado("nombre");
+        setInformacion(data?.nombre);
+        break;
+      case "Clasificacion":
+        setCampoActualizado("clasificacion");
+        setInformacion(data?.clasificacion);
+        break;
+      default:
+        setInformacion("no encontrado");
+    }
+  }
+
+  useEffect(() => {
+    const database = getFirestore();
+    const documento = doc(database, "agrupacion", IdAgrupacion);
+  
+    // Escucha en tiempo real para cambios en el documento
+    const unsubscribe = onSnapshot(documento, (snapshot) => {
+      if (snapshot.exists()) {
+        // El documento existe, actualiza el estado local con los nuevos datos
+        setData({ id: snapshot.id, ...snapshot.data() });
+      } else {
+        // El documento no existe
+        console.log("El documento no existe.");
+      }
+    });
+  
+    // Limpia el objeto de escucha cuando el componente se desmonta
+    return () => unsubscribe();
+  }, []);
+
+  return (
+    <body className={estilos.container}>
+      <div className={estilos.subcontainer}>
+        <div className={estilos.box}>
+          <section className={estilos.seccion1}>
+            <button onClick={() => Seleccion("Mision")}>Mision</button>
+            <button onClick={() => Seleccion("Vision")}>Vision</button>
+            <button onClick={() => Seleccion("Objetivos")}>Objetivos</button>
+            <button onClick={() => Seleccion("Contacto")}>Contacto</button>
+            <button onClick={() => Seleccion("Nombre")}>Nombre</button>
+            <button onClick={() => Seleccion("Clasificacion")}>
+              Clasificacion
+            </button>
+          </section>
+
+          <section className={estilos.seccion2}>
+            <p>{informacion}</p>
+          </section>
+          <section className={estilos.seccion3}>
+            <form className={estilos.form}>
+              <textarea
+                name="Campo de cambios"
+                placeholder="Agregar cambios"
+                value={update}
+                onChange={(e) => setUpdate(e.target.value)}
+              />
+            </form>
+          </section>
+        </div>
+      </div>
+      <div className={estilos.Button}>
+        <button
+          onClick={() => {
+            Enviar();
+          }}
+        >
+          Guardar
+        </button>
+      </div>
+    </body>
+  );
 }
 
 export function validarEntradas(tipo, valor) {
   if (tipo == "texto") {
-    if (/^[A-Za-z]+$/.test(valor)) { // valida que el dato de entrada sea algun texto que solo sea letras del alfabeto
+    if (/^[A-Za-z]+$/.test(valor)) {
+      // valida que el dato de entrada sea algun texto que solo sea letras del alfabeto
       return true;
     } else {
       alert("invalido!!");
       return false;
     }
   } else if (tipo == "correo") {
-    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(valor)) { //valida que el dato de entrada sea del
-      return true;                                                        //tipo xxxx@xxx.xxx
+    if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(valor)) {
+      //valida que el dato de entrada sea del
+      return true; //tipo xxxx@xxx.xxx
     } else {
       return false;
     }
-  } else if (tipo == 'telefono') {
-    if(/^[0-9]+$/.test(valor)) {
+  } else if (tipo == "telefono") {
+    if (/^[0-9]+$/.test(valor)) {
       return true;
     } else {
       return false;
@@ -43,23 +183,16 @@ export function validarEntradas(tipo, valor) {
   }
 }
 
+async function ActualizarBase(updates, id, coleccion) {
+  const userDocumentRef = doc(db, coleccion, id);
 
-
-async function ActualizarBase(updates,user,coleccion) {
   //Busca una referencia del documento que se va a modificar
-  const userDocumentRef = doc(db, coleccion, user.uid);
 
   // los datos para cambiar
-  
 
   // actualiza el documento
   await updateDoc(userDocumentRef, updates);
-
 }
-
-    
- 
-
 
 function EditarUser() {
   const [nombre, setNombre] = useState("");
@@ -67,24 +200,26 @@ function EditarUser() {
   const [telefono, setTelefono] = useState("");
   const navegar = useNavigate();
   const user = useUser();
+  const id = user.uid;
 
-  const  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (validarEntradas("texto", nombre) && validarEntradas("correo", correo) && validarEntradas("telefono", telefono.replace(/-/g, ''))) {
-      alert('aprobado!!');
+    if (
+      validarEntradas("texto", nombre) &&
+      validarEntradas("correo", correo) &&
+      validarEntradas("telefono", telefono.replace(/-/g, ""))
+    ) {
+      alert("aprobado!!");
       const updates = {
         nombrecompleto: nombre,
         email: correo,
-        telefono: telefono
+        telefono: telefono,
       };
-     ActualizarBase(updates, user, 'usuarios');
-
+      ActualizarBase(updates, id, "usuarios");
     } else {
       alert("Campo Invalido!!");
     }
-
-    
   };
 
   return (
