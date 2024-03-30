@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,14 +12,9 @@ import AddIcon from '@mui/icons-material/Add';
 import ULogo from "../assets/Logo-footer.png";
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-export const agrupaciones = [
-  { nombre: "alejo", descripcion: "no saluda1" },
-  { nombre: "bubin", descripcion: "no saluda2" },
-  { nombre: "reaper", descripcion: "no saluda3" },
-  { nombre: "uco", descripcion: "no saluda4" },
-  { nombre: "doc", descripcion: "no saluda5" },
-  { nombre: "test", descripcion: "no saluda6" }
-];
+import { useUser } from '../user';
+import { Deslogearse } from '../pages/auth';
+import { getGroupsArray } from '../pages/groups';
 
 const StyledButton = styled(Button)`
   margin-right: 8px; 
@@ -74,15 +69,38 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const navegar = useNavigate();
+  const usuario = useUser();
+  const [usuarioLogueado, setUsuarioLogueado] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearch = () => {
+  useEffect(() =>{
+    if (usuario) {
+      setUsuarioLogueado(true);
+    }
+  }, [usuario, navegar]);
+
+  const handleCerrarSesion = async () => {
+    try {
+      await Deslogearse();
+      setUsuarioLogueado(false);
+      navegar('/login', { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSearch = async () => {
     let found = false;
 
+    const agrupaciones = await getGroupsArray();
+
     for (const agrupacion of agrupaciones) {
+      const nombre = agrupacion.value.nombre?.toLowerCase();
+      const descripcion = agrupacion.value.descripcion?.toLowerCase();
+  
       if (
-        agrupacion.nombre.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-        agrupacion.descripcion.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        (nombre && nombre.includes(searchTerm.trim().toLowerCase())) ||
+        (descripcion && descripcion.includes(searchTerm.trim().toLowerCase()))
       ) {
         found = true;
         break; 
@@ -125,8 +143,14 @@ export default function SearchAppBar() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </Search>
-        <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesion</StyledButton>
-        <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
+        {usuarioLogueado ? (
+        <StyledButton variant="contained" onClick={handleCerrarSesion}>Cerrar Sesión</StyledButton>
+      ) : (
+        <div>
+          <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesión</StyledButton>
+          <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
+        </div>
+      )}
         <IconButton aria-label="user" sx={{ mr: 2 }}>
           <Link to="/profile" style={{ textDecoration: 'none' }}>
             <Avatar>J</Avatar>
