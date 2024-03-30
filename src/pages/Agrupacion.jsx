@@ -5,9 +5,10 @@ import Stack from '@mui/material/Stack';
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import { db } from './firebase.js';
-import { collection, getDocs } from 'firebase/firestore';
-import { useParams } from 'react-router-dom';
-import ARCA from './../assets/ARCA.png';
+import { collection, getDocs, doc, updateDoc, arrayUnion, getDoc} from 'firebase/firestore';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { getAuth } from 'firebase/auth';
 
 function Agrupacion() {
     const [clubName, setClubName] = useState('');
@@ -17,16 +18,45 @@ function Agrupacion() {
     const [clubClasificacion, setClubClasificacion] = useState('');
     const [clubImagen, setClubImagen] = useState('');
     const [open, setOpen] = useState(false);
+    const [isAffiliated, setIsAffiliated] = useState(false);
     const anchorRef = useRef(null);
     const { codigo } = useParams();
+    const navigate = useNavigate();
+    const auth = getAuth();
+    const [user] = useAuthState(auth);
+    const [isMember, setIsMember] = useState(false);
 
-    const handleClick = () => {
-        setOpen(true);
+    const handleClick = async () => {
+        try {
+            const userRef = doc(db, 'usuarios', user.uid);
+            await updateDoc(userRef, {
+                Agrupaciones: arrayUnion(codigo)
+            });
+            setIsAffiliated(true);
+            setIsMember(true); // Actualiza el estado isMember después de unirse a la agrupación
+            setOpen(true);
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
     const handleClose = () => {
         setOpen(false);
     };
+
+    useEffect(() => {
+        const fetchUserGroups = async () => {
+            const userRef = doc(db, 'usuarios', user.uid);
+            const userSnap = await getDoc(userRef);
+    
+            if (userSnap.exists()) {
+                const userData = userSnap.data();
+                setIsMember(userData.Agrupaciones.includes(codigo));
+            }
+        };
+    
+        fetchUserGroups();
+    }, [user, codigo]);
 
     useEffect(() => {
         const fetchClubData = async () => {
@@ -88,9 +118,9 @@ function Agrupacion() {
                         </div>
                     </div>
                     <div className="orange-button">
-                        <Button ref={anchorRef} className="orange-button" onClick={handleClick}>
-                            Unirse
-                        </Button>
+                    <Button ref={anchorRef} className="orange-button" onClick={isMember ? () => navigate(`/afiliado/${codigo}`) : handleClick}>
+                        {isMember ? 'Ir a la Página de Afiliados de la agrupación' : 'Unirse'}
+                    </Button>
                         <Popover
                             open={open}
                             anchorEl={anchorRef.current}

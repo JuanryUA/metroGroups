@@ -32,7 +32,7 @@ function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/about" element={<About />}></Route>
             <Route path="/agrupacion/:codigo" element={<Agrupacion />} />
-            <Route path="/afiliado" element={<AgruAfiliado />}></Route>
+            <Route path="/afiliado/:codigo" element={<AgruAfiliado />}></Route>
             <Route path="/admin" element={<Admin />}></Route>
             <Route path="*" element={<NoPage />}></Route>
             <Route path="/login" element={<InicioSesion />}></Route>

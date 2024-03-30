@@ -1,89 +1,88 @@
-/* AgruAfiliado.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif&display=swap');
 
 .AgruAfiliado {
     text-align: center;
 }
 
 .top-block {
-    background-color: #ffffff;
-    padding: 20px;
-}
-
-.bottom-container {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.left-bottom-block, .right-bottom-block {
-    width: 48%;
-}
-.username {
-    align-self: flex-start;
-    margin-bottom: 0px;
-}
-.left-bottom-block {
-    border-right: 1px solid #ccc;
-    padding: 20px;
-    background-color: #fcd9bd;
-    border-top-right-radius: 10%;
-}
-
-.right-bottom-block {
-    padding: 20px;
-    border-top-left-radius: 10%;
-    background-color: #ffa742;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
 .comments-section {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 0px;
-    margin-top: 20px;
-    padding: 10px 10px; 
-    background-color: #ff8800;
-}
-
-.username {
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: larger;
-}
-
-
-.comment-field {
-    display: flex;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: whitesmoke;
-    width: 100%;
-    margin: 0;
-    box-sizing: border-box;
+    align-items: center;
 }
 
 .rating {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 10px;
 }
 
-img {
-    max-width: 100%;
+
+
+.image-section {
+    width: 50%;
+    background-image: url('https://univnoticias.com/wp-content/uploads/2021/04/Estudiantes-de-la-UNIMET.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.title-container {
+    text-align: center;
+    margin-top: 10px;
+    padding: 0; 
+    background-color: #fcd9bd;
+    border: 1px solid rgb(255, 192, 140);
+}
+
+.bottom-container {
+    display: flex;
+    background-color: #fcd9bd;
+    padding: 0; 
+    margin-top: 0; 
+}
+
+.left-bottom-block, .right-bottom-block {
+    width: 50%;
+    border: 1px solid rgb(255, 192, 140);
+    padding: 0; 
+}
+
+.left-bottom-block {
+    background-color: #fcd9bd;
+    margin-right: 0; 
+}
+
+.right-bottom-block {
+    padding-left: 0; 
+    margin-left: 0; 
+}
+
+.input-field {
+    display: block;
+    margin-bottom: 20px; 
+    width: calc(80% - 24px);
+    background-color: white; 
+    align-self: center;
+}
+
+.realizar-pago {
+    width: 50%; 
+    margin: 20px auto; 
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 .paypal-button {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     background-image: url('../assets/paypalbutton.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -91,9 +90,75 @@ img {
     border: none;
     cursor: pointer;
     background-color: transparent;
-    transition: opacity 0.3s ease; /* Añade una transición suave */
+    transition: opacity 0.3s ease;
 }
 
 .paypal-button:hover {
-    opacity: 0.5; /* Cambia la opacidad al pasar el cursor por encima */
+    opacity: 0.5; 
+}
+
+.ganancias-container {
+    margin-top: 20px;
+}
+
+.ganancias {
+    font-size: 24px;
+}
+
+.realizar-pago:disabled, .paypal-button:disabled {
+    opacity: 0.5; 
+    cursor: not-allowed; 
+}
+
+.background-image {
+    position: relative;
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto Serif', serif;
+}
+
+.background-image h1 {
+    color: rgb(255, 255, 255);
+    font-size: 10em;
+    text-shadow: 2px 2px 100px rgba(0, 0, 0, 0.5);
+    font-family: 'Roboto Serif', serif;
+    font-weight: 600;
+    font-style: italic;
+    margin-bottom: 0; /* Ajusta este valor según tus necesidades */
+}
+
+.background-image h2 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 3em;
+    font-family: 'Roboto Serif', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 0; /* Ajusta este valor según tus necesidades */
+}
+
+.background-image p {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 1.2em;
+    font-family: 'Roboto Serif', serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.background-blur {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgba(0, 0, 0, 0.5);
+    filter: blur(10px);
+    z-index: -1;
 }
