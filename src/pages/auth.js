@@ -3,7 +3,6 @@
 import { auth, db } from './firebase';
 import { doc, query, where, getDocs, setDoc, collection } from 'firebase/firestore';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, getAdditionalUserInfo } from 'firebase/auth';
-import { Google } from '@mui/icons-material';
 
 export async function Logearse(email, password) {
     try{

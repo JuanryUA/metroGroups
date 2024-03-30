@@ -8,8 +8,6 @@ export default function PerfilUsuario() {
   const [data, setData] = useState();
   const navegar = useNavigate();
   const usuario = useUser();
-  const id = useUser().uid;
-  console.log(id);
 
   useEffect(() =>{
     if (!usuario) {
@@ -20,6 +18,7 @@ export default function PerfilUsuario() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        const id = usuario.uid;
         const database = getFirestore();
         const documento = doc(
           database,
@@ -54,7 +53,7 @@ export default function PerfilUsuario() {
         </section>
         <div className={styles.Titulo}>
           <img src='https://cdn-icons-png.flaticon.com/512/6378/6378141.png' ></img>
-          <h1 class>Informacion de la cuenta </h1>
+          <h1 >Informacion de la cuenta </h1>
         </div>
 
         <section className={styles.seccion2}>
