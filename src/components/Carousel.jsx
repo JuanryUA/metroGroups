@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import AgrupacionCard from "./AgrupacionCard";
 import { getGroupsArray } from "../pages/groups"; 
 import { useEffect, useState } from "react";
+import HomeCard from "./HomeCard";
 
 
 
@@ -24,20 +25,24 @@ export default function Carousel() {
   }, []);
 
   var settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
   };
 
   return (
       <Slider {...settings}>
+
+        <HomeCard></HomeCard>
+
           {agrupaciones.map(agrupacion => (
               <AgrupacionCard
                   key={agrupacion.key}
                   nombre={agrupacion.value.nombre}
                   descripcion={agrupacion.value.mision}
+                  imagen={agrupacion.value.imagen}
               />
           ))}
       </Slider>
