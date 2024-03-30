@@ -2,7 +2,8 @@
 
 import { auth, db } from './firebase';
 import { doc, query, where, getDocs, setDoc, collection } from 'firebase/firestore';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, getAdditionalUserInfo } from 'firebase/auth';
+import { Google } from '@mui/icons-material';
 
 export async function Logearse(email, password) {
     try{
@@ -38,6 +39,33 @@ export async function LogearseConGoogle() {
       return null;
     }
   }
+
+export async function RegistroPorGoogle(){
+    try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const additionalInfo = getAdditionalUserInfo(result);
+
+        if (additionalInfo.isNewUser) {
+            const Agrupaciones = [];
+            const Administrador = false;
+            const nombrecompleto = result.user.displayName;
+            const telefono = result.user.phoneNumber;
+            const email = result.user.email;
+            await setDoc(doc(db, "usuarios", result.user.uid), {
+                nombrecompleto,
+                telefono,
+                email,
+                Agrupaciones,
+                Administrador,
+            });
+        }
+        return result.user;          
+    } catch (e) {
+        console.error(e)
+        return null
+    }
+}
 
   export async function Registro(nombrecompleto, email, telefono, contraseña) {
     try {
