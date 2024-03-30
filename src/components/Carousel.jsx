@@ -1,39 +1,45 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React from "react";
 import Slider from "react-slick";
 import AgrupacionCard from "./AgrupacionCard";
+import { getGroupsArray } from "../pages/groups"; 
+import { useEffect, useState } from "react";
 
 
 
 export default function Carousel() {
-    var settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    };
-    return (
+  const [agrupaciones, setAgrupaciones] = useState([]);
+
+  useEffect(() => {
+      const fetchAgrupaciones = async () => {
+          try {
+              const arrayAgrupaciones = await getGroupsArray();
+              setAgrupaciones(arrayAgrupaciones);
+          } catch (error) {
+              console.error("Error al obtener las agrupaciones:", error);
+          }
+      };
+
+      fetchAgrupaciones();
+  }, []);
+
+  var settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+  };
+
+  return (
       <Slider {...settings}>
-    
-            <AgrupacionCard nombre="alejo" descripcion="no saluda"></AgrupacionCard>
-        
-    
-            <AgrupacionCard nombre="bubin" descripcion="no saluda"></AgrupacionCard>
-        
-    
-            <AgrupacionCard nombre="reaper" descripcion="no saluda"></AgrupacionCard>
-        
-    
-            <AgrupacionCard nombre="uco" descripcion="no saluda"></AgrupacionCard>
-        
-    
-            <AgrupacionCard nombre="doc" descripcion="no saluda"></AgrupacionCard>
-        
-    
-            <AgrupacionCard nombre="test" descripcion="no saluda"></AgrupacionCard>
-        
+          {agrupaciones.map(agrupacion => (
+              <AgrupacionCard
+                  key={agrupacion.key}
+                  nombre={agrupacion.value.nombre}
+                  descripcion={agrupacion.value.mision}
+              />
+          ))}
       </Slider>
-    );
-  }
+  );
+}

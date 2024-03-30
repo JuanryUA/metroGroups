@@ -14,15 +14,7 @@ import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../user';
 import { Deslogearse } from '../pages/auth';
-
-export const agrupaciones = [
-  { nombre: "alejo", descripcion: "no saluda1" },
-  { nombre: "bubin", descripcion: "no saluda2" },
-  { nombre: "reaper", descripcion: "no saluda3" },
-  { nombre: "uco", descripcion: "no saluda4" },
-  { nombre: "doc", descripcion: "no saluda5" },
-  { nombre: "test", descripcion: "no saluda6" }
-];
+import { getGroupsArray } from '../pages/groups';
 
 const StyledButton = styled(Button)`
   margin-right: 8px; 
@@ -97,13 +89,18 @@ export default function SearchAppBar() {
     }
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     let found = false;
 
+    const agrupaciones = await getGroupsArray();
+
     for (const agrupacion of agrupaciones) {
+      const nombre = agrupacion.value.nombre?.toLowerCase();
+      const descripcion = agrupacion.value.descripcion?.toLowerCase();
+  
       if (
-        agrupacion.nombre.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
-        agrupacion.descripcion.toLowerCase().includes(searchTerm.trim().toLowerCase())
+        (nombre && nombre.includes(searchTerm.trim().toLowerCase())) ||
+        (descripcion && descripcion.includes(searchTerm.trim().toLowerCase()))
       ) {
         found = true;
         break; 
