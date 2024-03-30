@@ -1,26 +1,36 @@
-import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
-import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
-import AddIcon from "@mui/icons-material/Add";
+import React, { useState, useEffect } from 'react';
+import { styled, alpha } from '@mui/material/styles';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import AddIcon from '@mui/icons-material/Add';
 import ULogo from "../assets/Logo-footer.png";
 import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../user';
+import { Deslogearse } from '../pages/auth';
+
+export const agrupaciones = [
+  { nombre: "alejo", descripcion: "no saluda1" },
+  { nombre: "bubin", descripcion: "no saluda2" },
+  { nombre: "reaper", descripcion: "no saluda3" },
+  { nombre: "uco", descripcion: "no saluda4" },
+  { nombre: "doc", descripcion: "no saluda5" },
+  { nombre: "test", descripcion: "no saluda6" }
+];
 
 const StyledButton = styled(Button)`
-margin-right : 8px; 
-background-color: #FDA403;  
-&:hover {
-  background-color: #222831`;
+  margin-right: 8px; 
+  background-color: #FDA403;  
+  &:hover {
+    background-color: #222831;
+  }
+`;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,7 +64,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   width: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     [theme.breakpoints.up("sm")]: {
@@ -68,22 +77,62 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function SearchAppBar() {
   const navegar = useNavigate();
+  const usuario = useUser();
+  const [usuarioLogueado, setUsuarioLogueado] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() =>{
+    if (usuario) {
+      setUsuarioLogueado(true);
+    }
+  }, [usuario, navegar]);
+
+  const handleCerrarSesion = async () => {
+    try {
+      await Deslogearse();
+      setUsuarioLogueado(false);
+      navegar('/login', { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSearch = () => {
+    let found = false;
+
+    for (const agrupacion of agrupaciones) {
+      if (
+        agrupacion.nombre.toLowerCase().includes(searchTerm.trim().toLowerCase()) ||
+        agrupacion.descripcion.toLowerCase().includes(searchTerm.trim().toLowerCase())
+      ) {
+        found = true;
+        break; 
+      }
+    }
+
+    if (found) {
+      alert('Si existe la agrupacion');
+    } else {
+      alert('No existe');
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
   
   return (
     <AppBar position="static">
       <Toolbar sx={{ backgroundColor: "#FFEDD8" }}>
-        <Button variant="text" href="/home">
+        <Button variant='text' href='/home'>
           <img src={ULogo} alt="my image" />
         </Button>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          sx={{ mr: 2 }}
-          href="/about"
-        >
-          <Typography sx={{ color: "black" }}>Mas informacion</Typography>
+        <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} href='/about'>
+          <Typography sx={{ color: "black" }}>
+            Mas informacion
+          </Typography>
           <AddIcon sx={{ color: "black" }} />
         </IconButton>
         <Search sx={{ mr: 2, flexGrow: 1 }}>
@@ -92,11 +141,19 @@ export default function SearchAppBar() {
           </SearchIconWrapper>
           <StyledInputBase
             placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
+            inputProps={{ 'aria-label': 'search', onKeyDown: handleKeyPress }}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </Search>
-        <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesion</StyledButton>
-        <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
+        {usuarioLogueado ? (
+        <StyledButton variant="contained" onClick={handleCerrarSesion}>Cerrar Sesión</StyledButton>
+      ) : (
+        <div>
+          <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesión</StyledButton>
+          <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
+        </div>
+      )}
         <IconButton aria-label="user" sx={{ mr: 2 }}>
           <Link to="/profile" style={{ textDecoration: 'none' }}>
             <Avatar>J</Avatar>
