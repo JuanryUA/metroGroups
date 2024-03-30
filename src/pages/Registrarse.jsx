@@ -54,7 +54,7 @@ export default function Registrarse() {
           </div>
           <button className={styles.buttonr} onClick={() => handleRegistro()}>Registrarse</button>
           {error && <p className={styles.error}>{error}</p>}
-          <p className={styles.text}>Tienes cuenta? Inicia sesión acá abajo</p>
+          <p className={styles.text}>¿Tienes cuenta? Inicia sesión acá abajo</p>
           <button className={styles.buttonI} onClick={() => navegar('/login', {replace: true})}>Inicio Sesión</button>
           </div>
       </div>
