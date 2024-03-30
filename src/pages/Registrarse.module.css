@@ -57,6 +57,16 @@ input{
     border-radius: 5px;
 }
 
+.googleButton {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.googleButton img {
+    width: 80px;
+}
+
 .error {
     color: red;
     font-size: 14px;

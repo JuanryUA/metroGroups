@@ -7,8 +7,15 @@ import { useUser } from "../user";
 export default function PerfilUsuario() {
   const [data, setData] = useState();
   const navegar = useNavigate();
+  const usuario = useUser();
   const id = useUser().uid;
   console.log(id);
+
+  useEffect(() =>{
+    if (!usuario) {
+      navegar('/login', {replace: true})
+    }
+  }, [usuario, navegar]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -2,6 +2,7 @@ import styles from './Registrarse.module.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Registro } from './auth';
+import { RegistroPorGoogle } from './auth';
 
 export default function Registrarse() {
     const [nombrecompleto, setNombreCompleto] = useState('');
@@ -36,6 +37,19 @@ export default function Registrarse() {
       }
     };
 
+    const handleGoogleLogin = async () => {
+      try {
+        const usuario = await RegistroPorGoogle();
+        if (usuario) {
+          navegar('/home', {replace: true});
+        } else {
+          setError('Error al iniciar sesión con Google.');
+        }
+      } catch (error) {
+        setError('Ocurrió un error al intentar iniciar sesión con Google. Por favor, inténtalo de nuevo más tarde.');
+      }
+    };
+
     return (
       <div className={styles.inicio}>
           <div className={styles.container}>
@@ -54,6 +68,11 @@ export default function Registrarse() {
           </div>
           <button className={styles.buttonr} onClick={() => handleRegistro()}>Registrarse</button>
           {error && <p className={styles.error}>{error}</p>}
+          <hr></hr>
+          <div className={styles.googleButton} type="button" onClick={() => handleGoogleLogin()}>
+            <img src="https://static.vecteezy.com/system/resources/previews/016/716/465/original/gmail-icon-free-png.png" alt="Google Icon" />
+          </div>
+          <hr></hr>
           <p className={styles.text}>¿Tienes cuenta? Inicia sesión acá abajo</p>
           <button className={styles.buttonI} onClick={() => navegar('/login', {replace: true})}>Inicio Sesión</button>
           </div>

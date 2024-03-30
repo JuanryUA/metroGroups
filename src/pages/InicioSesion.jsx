@@ -1,6 +1,6 @@
 import styles from './InicioSesion.module.css';
 import { useNavigate } from 'react-router-dom';
-import { Logearse, LogearseConGoogle, validarInicioSesion } from './auth';
+import { Logearse, RegistroPorGoogle, validarInicioSesion } from './auth';
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './firebase';
@@ -64,7 +64,7 @@ export default function InicioSesion() {
 
   const handleGoogleLogin = async () => {
     try {
-      const usuario = await LogearseConGoogle();
+      const usuario = await RegistroPorGoogle();
       if (usuario) {
         navegar('/home', {replace: true});
       } else {
