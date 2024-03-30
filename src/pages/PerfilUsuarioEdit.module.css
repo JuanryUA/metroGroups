@@ -13,8 +13,8 @@
   margin-right: 10%;
   margin-top: 2%;
   border-radius: 12px;
-  width: 50%;
-  height: 50%;
+  width: 40%;
+  height: 40%;
   box-shadow: 0px 4px 12px gray;
 }
 
@@ -59,10 +59,11 @@
 .Titulo {
     display: flex;
     justify-content: center;
+    margin-left: 0px;
 }
 
 .Titulo img {
-    width: 85px;
+    width: 90px;
     height:60px;
 }
 
