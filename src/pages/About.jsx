@@ -20,8 +20,6 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import Avatar from '@mui/material/Avatar';
 import { Link } from "react-router-dom";
 import { StyledButtonGroup } from "@mui/joy/ButtonGroup/ButtonGroup";
-
-
 const StyledListItemText = styled('div')`
   text-align: center;
 `;
