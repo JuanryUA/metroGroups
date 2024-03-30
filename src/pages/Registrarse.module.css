@@ -30,6 +30,16 @@ button{
     border-radius: 10px;
 }
 
+.inicio button{
+    background-color: #ffffff;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.inicio button:hover {
+    background-color: #C3C6CB;
+}
+
 .buttonr{
     width: 70%;
     height: 45px;
@@ -60,8 +70,13 @@ input{
 .googleButton {
     display: flex;
     align-items: center;
+    transition: filter 0.3s ease;
     cursor: pointer;
 }
+
+.googleButton:hover {
+    filter: grayscale(50%);
+  }
 
 .googleButton img {
     width: 80px;
@@ -71,3 +86,11 @@ input{
     color: red;
     font-size: 14px;
   }
+
+  hr {
+    width: 70%;
+    border: none;
+    height: 1px;
+    background-color: white;
+    margin: 20px;
+}

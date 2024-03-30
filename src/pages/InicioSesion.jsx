@@ -36,7 +36,6 @@ export default function InicioSesion() {
     }, [email]);
       
     const handleLogin = async () => {
-      if(datosUsuario != null){
           try {
             const correoValido = await validarInicioSesion(email);
             console.log(datosUsuario);
@@ -59,7 +58,6 @@ export default function InicioSesion() {
           } catch (error) {
             setError('Ocurrió un error al intentar iniciar sesión. Por favor, inténtalo de nuevo más tarde.');
           }        
-      }
     };
 
   const handleGoogleLogin = async () => {
@@ -107,12 +105,12 @@ export default function InicioSesion() {
             </select>            
           </div>
           <button className={styles.buttonS} onClick={() => handleLogin()} type="submit">Iniciar Sesión</button>
+          {error && <p className={styles.error}>{error}</p>}
           <hr></hr>
           <div className={styles.googleButton} type="button" onClick={() => handleGoogleLogin()}>
             <img src="https://static.vecteezy.com/system/resources/previews/016/716/465/original/gmail-icon-free-png.png" alt="Google Icon" />
           </div>
           <hr></hr>
-          {error && <p className={styles.error}>{error}</p>}
           <p className={styles.text}>No tienes cuenta? Registrate acá abajo</p>
           <button className={styles.buttonR} onClick={() => navegar('/register', {replace: true})}>Registro</button>
         </div>
