@@ -25,6 +25,15 @@ const StyledListItemText = styled('div')`
   text-align: center;
 `;
 
+const StyledCardMedia = styled(CardMedia)`
+  text-align: center;
+`;
+
+const StyledCardContent = styled(CardContent)`
+  justify-content: center;
+  height: 140px;
+`;
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -32,6 +41,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   color: theme.palette.text.secondary,
+
 }));
 
 const agrupaciones = [
@@ -54,47 +64,48 @@ export default function About() {
       <Grid container spacing={2}>
         <Grid xs={4}>
        
-          <Item>
+
             <Card>
-                <CardMedia>
+                <StyledCardMedia>
                     MISION
-                </CardMedia>
-                <CardContent>
-                    DESCRIPCION
-                </CardContent>
+                </StyledCardMedia>
+                <StyledCardContent>
+                Aportar a los estudiantes de la Universidad Metropolitana una plataforma en línea con acceso a las distintas agrupaciones que conforman a la universidad, siendo un espacio virtual del tipo “red social” que les permitirá tanto unirse a cualquier agrupación de su gusto como también compartir información entre ellos de sus experiencias y vivencias, de ésta forma podrán aportar un valor agregado al espacio de las agrupaciones dentro de la universidad. 
+                </StyledCardContent>
             </Card>
-          </Item>
+
         </Grid>
         <Grid xs={4}>
-          <Item>
+          
             <Card>
-                <CardMedia>
+                <StyledCardMedia>
                     VISION
-                </CardMedia>
-                <CardContent>
-                    DESCRIPCION
-                </CardContent>
+                </StyledCardMedia>
+                <StyledCardContent>
+                Convertir Metro Groups en la plataforma principal que dé voz y vista a las distintas agrupaciones de la Universidad Metropolitana, llegando así a la mayor cantidad de estudiantes posible y permitiéndoles hallar espacios de recreación, desarrollo personal y profesional mientras interactúan con personas de intereses comunes.
+                </StyledCardContent>
             </Card>
-          </Item>
+          
         </Grid>
         <Grid xs={4}>
-          <Item>
+          
             <Card>
-                <CardMedia>
+                <StyledCardMedia>
                     OBJETIVOS
-                </CardMedia>
-                <CardContent>
-                    DESCRIPCION
-                </CardContent>
+                </StyledCardMedia>
+                <StyledCardContent>
+                 Implementar una plataforma web dedicada a la gestión y manejo de las agrupaciones de la Universidad Metropolitana, tanto por parte de los estudiantes como de las autoridades encargadas de la gestión de tales agrupaciones en la universidad.
+
+                </StyledCardContent>
             </Card>
-          </Item>
+          
         </Grid>
         <Grid xs={12}>
-          <Item>
+          
             <Card>
-                <CardMedia>
+                <StyledCardMedia>
                     TODAS LA AGRUPACIONES
-                </CardMedia>
+                </StyledCardMedia>
                 <CardContent>
                     <List
                         sx={{ width: '100%', maxWidth: '100%', bgcolor: 'background.paper' }}
@@ -121,7 +132,7 @@ export default function About() {
                     <Button size="big" sx={{width: '100%'}}>CREAR AGRUGPACION</Button>
                 </CardActions>
             </Card>
-          </Item>
+     
         </Grid>
       </Grid>
 
