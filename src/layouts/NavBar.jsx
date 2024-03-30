@@ -126,12 +126,7 @@ export default function SearchAppBar() {
         <Button variant='text' href='/home'>
           <img src={ULogo} alt="my image" />
         </Button>
-        <IconButton size="large" edge="start" color="inherit" aria-label="open drawer" sx={{ mr: 2 }} href='/about'>
-          <Typography sx={{ color: "black" }}>
-            Mas informacion
-          </Typography>
-          <AddIcon sx={{ color: "black" }} />
-        </IconButton>
+ 
         <Search sx={{ mr: 2, flexGrow: 1 }}>
           <SearchIconWrapper>
             <SearchIcon />

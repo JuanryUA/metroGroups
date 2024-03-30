@@ -4,7 +4,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Avatar from "../assets/avatar.png";
+import Background from "../assets/Background.png";
+import Logo from "../assets/ladingPage.jpg";
+import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 const StyledCard = styled(Card)`
@@ -16,7 +18,6 @@ border-widht: 2px;
 border-style : solid; 
 border-color : black;
 `
-
 const StyledButton = styled(Button)`
   margin-right: 8px; 
   background-color: #FDA403;  
@@ -25,29 +26,26 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export default function AgrupacionCard({nombre, descripcion, imagen}) {
 
-  const testIMG = imagen
+
+export default function HomeCard() {
+
+    const navegar = useNavigate();
 
     return(
         <StyledCard>
         <CardMedia
-      sx={{ height: 425 }}
-      image={testIMG}
-    >
+      sx={{ height: 550}}
+      image={Logo}
+            />
+        <CardActions sx={{justifyContent : "center"}}>
+                <StyledButton  
+                variant="contained" 
+                size="big"
+                onClick={() => navegar('/about')}
+                >Conoce mas</StyledButton>
+        </CardActions>
 
-    </CardMedia>
-    <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
-        {nombre}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        {descripcion}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <StyledButton variant="contained" size="big">Conoce mas</StyledButton>
-    </CardActions>
-          </StyledCard>
+        </StyledCard>
     )
 }
