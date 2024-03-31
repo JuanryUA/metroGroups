@@ -3,7 +3,6 @@
 import { auth, db } from './firebase';
 import { doc, query, where, getDocs, setDoc, collection } from 'firebase/firestore';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut, getAdditionalUserInfo } from 'firebase/auth';
-import { Google } from '@mui/icons-material';
 
 export async function Logearse(email, password) {
     try{
@@ -48,6 +47,7 @@ export async function RegistroPorGoogle(){
 
         if (additionalInfo.isNewUser) {
             const Agrupaciones = [];
+            const Comentarios = {};
             const Administrador = false;
             const nombrecompleto = result.user.displayName;
             const telefono = result.user.phoneNumber;
@@ -58,6 +58,7 @@ export async function RegistroPorGoogle(){
                 email,
                 Agrupaciones,
                 Administrador,
+                Comentarios,
             });
         }
         return result.user;          
@@ -72,12 +73,14 @@ export async function RegistroPorGoogle(){
         const { user } = await createUserWithEmailAndPassword(auth, email, contraseña);
         const Agrupaciones = [];
         const Administrador = false;
+        const Comentarios = {};
         await setDoc(doc(db, "usuarios", user.uid), {
             nombrecompleto,
             telefono,
             email,
             Agrupaciones,
             Administrador,
+            Comentarios,
         });
         return user;
     } catch (e) {
