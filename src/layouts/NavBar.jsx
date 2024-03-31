@@ -148,7 +148,7 @@ export default function SearchAppBar() {
       )}
         <IconButton aria-label="user" sx={{ mr: 2 }}>
           <Link to="/profile" style={{ textDecoration: 'none' }}>
-            <Avatar>J</Avatar>
+            <Avatar>U</Avatar>
           </Link>
         </IconButton>
       </Toolbar>

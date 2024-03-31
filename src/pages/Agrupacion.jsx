@@ -15,6 +15,8 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
 
 function Agrupacion() {
   const [clubName, setClubName] = useState("");
@@ -147,6 +149,8 @@ function Agrupacion() {
   }, [codigo]);
 
   return (
+        <>
+        <NavBar />
     <div className="container">
       <div className="content-block">
         <div className="left-block">
@@ -212,6 +216,8 @@ function Agrupacion() {
         </div>
       </div>
     </div>
+        <Footer />
+        </>
   );
 }
 

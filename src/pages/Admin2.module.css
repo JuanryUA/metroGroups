@@ -1,0 +1,37 @@
+.inpu{
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.buttonconfirmar{
+    height: 25px;
+    margin-right: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttoncancelar{
+    height: 25px;
+    margin-right: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttonconfirmar:hover {
+    background-color: #C3C6CB;
+  }
+  
+  .buttoncancelar:hover {
+    background-color: #C3C6CB;
+  }
+
+  .mensaje{
+    color: black;
+  }

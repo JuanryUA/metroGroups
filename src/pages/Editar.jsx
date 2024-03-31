@@ -116,6 +116,8 @@ function EditarAgrupacion() {
   }, []);
 
   return (
+    <>
+    <NavBar />
     <body className={estilos.container}>
       <div className={estilos.subcontainer}>
         <div className={estilos.box}>
@@ -155,6 +157,8 @@ function EditarAgrupacion() {
         </button>
       </div>
     </body>
+    <Footer />
+    </>
   );
 }
 

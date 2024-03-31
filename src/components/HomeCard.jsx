@@ -5,13 +5,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Background from "../assets/Background.png";
-import Logo from "../assets/ladingPage.jpg";
+import Logo from "../assets/Group 110.png";
 import { useNavigate } from 'react-router-dom';
 
 import { styled } from '@mui/material/styles';
 const StyledCard = styled(Card)`
 max-width: 100% ; 
-height: 600px; 
+height: 790px; 
 background-color : #F4EDCC; 
 padding : 2px; margin : 2px; 
 border-widht: 2px; 
@@ -41,8 +41,7 @@ export default function HomeCard() {
         <CardActions sx={{justifyContent : "center"}}>
                 <StyledButton  
                 variant="contained" 
-                size="big"
-                onClick={() => navegar('/about')}
+                size="large"
                 >Conoce mas</StyledButton>
         </CardActions>
 

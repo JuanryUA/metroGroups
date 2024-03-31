@@ -16,6 +16,10 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import LogoA from "../assets/LOGOADMIN.png";
 import Fondo from "../assets/Background.png";
+import { useNavigate } from 'react-router-dom';
+import { useUser } from "../user"; 
+import { useEffect } from "react";
+import { validarAdmin } from "./adminvalidation";
 
 const StyledButton = styled(Button)`
 margin-right : 8px; 
@@ -23,12 +27,23 @@ background-color: #FDA403;
 &:hover {
   background-color: #222831`
 
-
-
-
-
-
 export default function Admin () {
+    const navegar = useNavigate();
+    const usuario = useUser();
+    console.log(usuario)
+
+    useEffect(() => {
+        if (!usuario) {
+            navegar('/home', { replace: true });
+        } else {
+            const email = usuario.email;
+            validarAdmin(email).then(esAdmin => {
+                if (esAdmin !== true) {
+                    navegar('/home', { replace: true });
+                }
+            });
+        }
+    }, [usuario, navegar]);
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -54,7 +69,7 @@ export default function Admin () {
                                             
                                         />
                                         <CardActions sx={{justifyContent: "center"}}>
-                                            <StyledButton>
+                                            <StyledButton onClick={() => navegar('/admin2', {replace: true})}>
                                                 <Typography sx={{color : "white"}}>
                                                     Empezar
                                                 </Typography>

@@ -51,6 +51,8 @@ const AgrupacionesDisplay = () => {
     </div>
   );
 };
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
 
 export default function PerfilUsuario() {
   const [data, setData] = useState();
@@ -90,6 +92,8 @@ export default function PerfilUsuario() {
   }
 
   return (
+    <>
+    <NavBar />
     <body className={styles.body}>
       <div className={styles.box}>
         <section className={styles.seccion1}>
@@ -134,5 +138,7 @@ export default function PerfilUsuario() {
         </section>
       </div>
     </body>
+    <Footer />
+      </>
   );
 }

@@ -13,6 +13,8 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import AddIcon from '@mui/icons-material/Add';
 import ULogo from "../assets/Group 64.png";
+import { Deslogearse } from '../pages/auth';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -28,6 +30,17 @@ background-color: #FDA403;
 
 
 export default function SearchAppBar() {
+  const navegar = useNavigate();
+
+  const handleCerrarSesion = async () => {
+    try {
+      await Deslogearse();
+      navegar('/login', { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
 
       <AppBar position="static">
@@ -40,7 +53,7 @@ export default function SearchAppBar() {
             <img src={ULogo} alt="my image"  />
             </Button>
           <Typography sx={{ flexGrow: 1 }} />
-          <StyledButton variant='contained'>
+          <StyledButton variant='contained' onClick={handleCerrarSesion}>
               Cerrar Sesion
           </StyledButton>
         </Toolbar>
