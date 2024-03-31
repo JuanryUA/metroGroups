@@ -42,7 +42,7 @@ export default function AgregarAgrupacion() {
       const obtenerTiposAgrupaciones = async () => {
         try {
           const querySnapshot = await getDocs(collection(db, 'tiposagrupaciones'));
-          const tipos = querySnapshot.docs.map(doc => doc.data().clasificación);
+          const tipos = querySnapshot.docs.map(doc => doc.data().clasificacion);
           setOpcionesTipoAgrupacion(tipos);
         } catch (error) {
           setError('Error al obtener los tipos de agrupaciones.');

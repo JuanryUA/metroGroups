@@ -14,9 +14,11 @@ import DashboardImagenAdmin2 from "../assets/Admin2.png";
 import Footer from "../layouts/Footer";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "../user"; 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { validarAdmin } from "./adminvalidation";
-
+import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
+import { db } from './firebase';
+import styles from "./Admin2.module.css"
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -27,11 +29,14 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-
-
 export default function Admin2() {
   const navegar = useNavigate();
   const usuario = useUser();
+  const [confirmar1, setConfirmar1] = useState(false);
+  const [confirmar2, setConfirmar2] = useState(false);
+  const [mensaje, setMensaje] = useState('');
+  const [agregarentrada, setAgregarEntrada] = useState('')
+  const [eliminarentrada, setEliminarEntrada] = useState('')
 
   useEffect(() => {
       if (!usuario) {
@@ -45,6 +50,78 @@ export default function Admin2() {
           });
       }
   }, [usuario, navegar]);
+
+  const handleUnirseClick1 = () => {
+    setConfirmar1(true);
+  };
+
+  const handleUnirseClick2 = () => {
+    setConfirmar2(true);
+  };
+
+  const handleCancelar1 = () => {
+    setConfirmar1(false);
+  };
+  
+  const handleCancelar2 = () => {
+    setConfirmar2(false);
+  };
+
+  const agregarEntrada = async () => {
+    try {
+      if (!agregarentrada.trim()) {
+        setMensaje('La entrada no puede estar vacía');
+        return;
+      }
+      const entrada = agregarentrada.charAt(0).toUpperCase() + agregarentrada.slice(1);
+      if (!isNaN(entrada)) {
+        setMensaje('El valor introducido no puede ser un número');
+        return;
+      }
+      const q = query(collection(db, 'tiposagrupaciones'), where('clasificacion', '==', entrada));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+          setMensaje('Esta entrada ya existe');
+          return;
+      }
+      await addDoc(collection(db, 'tiposagrupaciones'), { clasificacion: entrada });
+      setMensaje('Entrada agregada correctamente');
+      setTimeout(() => {
+        setConfirmar1(false);
+        setMensaje('');
+        setAgregarEntrada('');
+      }, 2000);
+  } catch (error) {
+      setMensaje('Error al agregar la entrada:', error);
+  }
+  };
+
+  const eliminarEntrada = async () => {
+    try {
+      if (!eliminarentrada.trim()) {
+        setMensaje('La entrada no puede estar vacía');
+        return;
+      }
+      const entrada = eliminarentrada.charAt(0).toUpperCase() + eliminarentrada.slice(1);
+      const q = query(collection(db, 'tiposagrupaciones'), where('clasificacion', '==', entrada));
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.empty) {
+        setMensaje('Esta entrada no existe');
+        return;
+      }
+      const docId = querySnapshot.docs[0].id;
+      await deleteDoc(doc(db, 'tiposagrupaciones', docId));
+      setMensaje('Entrada eliminada correctamente');
+      setTimeout(() => {
+        setConfirmar2(false);
+        setMensaje('');
+        setEliminarEntrada('');
+      }, 2000);
+    } catch (error) {
+      setMensaje('Error al eliminar la entrada:', error);
+    }
+  };
+
   return (
     <>
     <NavBarAdmin />
@@ -131,15 +208,47 @@ export default function Admin2() {
             <Grid xs={6}>
             
             <div style={{ display: "flex", flexDirection: "column", marginRight: "30px" }}>
-              <Button variant="contained" color="primary" size="small" style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
+              <Button variant="contained" color="primary" size="small" onClick={handleUnirseClick1} style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
               Crear Entrada
               </Button>
-              <Button variant="contained" color="primary" size="small" style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
+              <Button variant="contained" color="primary" size="small" onClick={handleUnirseClick2} style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
               Eliminar Entradas
               </Button>
               <Button variant="contained" color="primary" size="small" style={{ backgroundColor: "black", color: "white" }}>
               Actualizar Cambios
               </Button>
+              {confirmar1 && (
+                        <div>
+                          <form onSubmit={agregarEntrada}> 
+                            <input
+                              className={styles.inpu}
+                              type="text"
+                              placeholder="Introduzca la entrada a agregar"
+                              value={agregarentrada}
+                              onChange={(e) => setAgregarEntrada(e.target.value)}
+                            />
+                          </form>                        
+                          <button className={styles.buttonconfirmar} onClick={() => agregarEntrada()} type="submit">Confirmar</button>
+                          <button className={styles.buttoncancelar} onClick={handleCancelar1}>Cancelar</button>
+                          {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
+                        </div>
+                    )}
+              {confirmar2 && (
+                      <div>
+                        <form onSubmit={eliminarEntrada}>
+                          <input
+                              className={styles.inpu}
+                              type="text"
+                              placeholder="Introduzca la entrada a eliminar"
+                              value={eliminarentrada}
+                              onChange={(e) => setEliminarEntrada(e.target.value)}
+                          />
+                        </form>                         
+                        <button className={styles.buttonconfirmar} onClick={() => eliminarEntrada()} type="submit">Confirmar</button>
+                        <button className={styles.buttoncancelar} onClick={handleCancelar2}>Cancelar</button>
+                        {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
+                      </div>
+                    )}
             </div>
             </Grid>
           </Grid>
