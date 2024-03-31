@@ -14,6 +14,7 @@ import DashboardImagenAdmin2 from "../assets/Admin2.png";
 import Footer from "../layouts/Footer";
 
 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -26,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Admin2() {
   return (
-    <>
+
     <NavBarAdmin />
     <Box sx={{ flexGrow: 1 }}>
     <Grid container spacing={2}>
@@ -128,6 +129,7 @@ export default function Admin2() {
           </Grid>
           </Grid>
     </Box>
+
     <Footer />
     </>
   );

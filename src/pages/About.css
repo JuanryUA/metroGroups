@@ -1,0 +1,131 @@
+/* About.css */
+
+/* Estilos generales para los Cards */
+
+.TOP-about-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  align-self: center
+}
+
+.Card1, .Card2, .Card3 {
+  margin-top: 0; /* Eliminar margen superior */
+  margin-bottom: 0; /* Eliminar margen inferior */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: auto;
+  width: 50%;
+}
+  
+  .Card1:hover, .Card2:hover, .Card3:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+  .img-with-margin {
+    width: 500px;
+    height: 500px; /* Ajusta este valor según tus necesidades */
+    margin-top: 20px; /* Ajusta este valor según tus necesidades */
+    object-fit: cover;
+    justify-content: center;
+    display: flex;
+  }
+  .img-with-margin, .Card1, .Card2, .Card3 {
+    flex: 1 0 auto;
+    margin: 0 auto;
+  }
+  
+  /* Estilos para el contenido de los Cards */
+  .StyledCardContent {
+    padding: 2px 16px;
+    flex-grow: 1;
+    height: auto;
+    font-size: 25px;
+    text-align: center;
+  }
+  
+  /* Estilos para los títulos de los Cards */
+  .StyledCardMedia {
+    background-color: #ff8c00;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    overflow: auto;
+    display: flex;
+  }
+  
+  /* Estilos para los botones */
+  .Button {
+    background-color: #ff8c00;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  
+  .Button:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Estilos para la lista de agrupaciones */
+  .List {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .ListItemButton {
+    background-color: #f9f9f9; /* Color de fondo */
+    margin: 5px; /* Espacio entre elementos */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave */
+  }
+  
+  .ListItemButton a {
+    display: block;
+    color: #333; /* Color del texto */
+    text-align: center;
+    padding: 10px 0; /* Espaciado interno */
+    text-decoration: none;
+  }
+  
+  .ListItemButton:hover {
+    background-color: #e0e0e0; /* Color de fondo al pasar el cursor */
+  }
+
+.StyledCardMediaAgrupaciones {
+  background-color: #ff8c00; /* Fondo naranja */
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.ListaAgrupaciones {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.Grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Grid-item-card {
+  width: 50%;
+}
