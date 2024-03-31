@@ -23,7 +23,7 @@
   padding: 50px;
 }
 
-button {
+.container button {
   background: none;
   border: none;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -33,13 +33,13 @@ button {
   ;
 }
 
-button:hover {
+.container button:hover {
   background-color: rgba(50, 46, 46, 0.877);
   color: rgba(226, 194, 15, 0.879);
   cursor: pointer;
 }
 
-button:focus {
+.container button:focus {
   font-weight: bolder;
   background: rgba(0, 0, 0, 0.726);
   color: white;

@@ -52,7 +52,14 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     transform: translate(0px, 5px);
+    transition: background-color 0.3s ease;
 }
+
+select:hover {
+    background-color: #C3C6CB; 
+    color: #333333; 
+    cursor: pointer;
+  }
 
 select:focus {
     outline: none; 
@@ -73,9 +80,14 @@ form input {
     border-radius: 5px;
 }
 
-button{
+.inicio button{
     background-color: #ffffff;
-    border-radius: 10px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.inicio button:hover {
+    background-color: #C3C6CB;
 }
 
 .buttonS {
@@ -90,8 +102,13 @@ button{
 .googleButton {
     display: flex;
     align-items: center;
+    transition: filter 0.3s ease;
     cursor: pointer;
 }
+
+.googleButton:hover {
+    filter: grayscale(50%);
+  }
 
 .googleButton img {
     width: 80px;
@@ -118,7 +135,7 @@ hr {
     border: none;
     height: 1px;
     background-color: white;
-    margin: 20px 0;
+    margin: 20px;
 }
 
 .container2 {

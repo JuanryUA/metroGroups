@@ -1,7 +1,6 @@
 import './Agrupacion.css';
 import { useState, useRef, useEffect } from 'react'; 
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import { db } from './firebase.js';
@@ -18,13 +17,50 @@ function Agrupacion() {
     const [clubClasificacion, setClubClasificacion] = useState('');
     const [clubImagen, setClubImagen] = useState('');
     const [open, setOpen] = useState(false);
-    const [isAffiliated, setIsAffiliated] = useState(false);
+    const [, setIsAffiliated] = useState(false);
     const anchorRef = useRef(null);
     const { codigo } = useParams();
     const navigate = useNavigate();
     const auth = getAuth();
     const [user] = useAuthState(auth);
     const [isMember, setIsMember] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [, setUserId] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+                setUserId(user.uid); // Establecer el ID del usuario actual en el estado
+            } else {
+                setUserId(null); // Limpiar el ID del usuario si no está autenticado
+            }
+        });
+
+        return () => unsubscribe(); // Limpiar el suscriptor en la limpieza
+    }, [auth]);
+
+    // Función para obtener el ID del usuario actual
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const userSnapshots = await getDocs(collection(db, 'usuarios'));
+                let allComments = [];
+    
+                userSnapshots.forEach((doc) => {
+                    const userData = doc.data();
+                    if (userData.Comentarios && userData.Comentarios[codigo]) {
+                        allComments = [...allComments, ...userData.Comentarios[codigo]];
+                    }
+                });
+    
+                setComments(allComments);
+            } catch (error) {
+                console.log(error.message);
+            }
+        };
+    
+        fetchComments();
+    }, [codigo]);
 
     const handleClick = async () => {
         try {
@@ -118,9 +154,9 @@ function Agrupacion() {
                         </div>
                     </div>
                     <div className="orange-button">
-                    <Button ref={anchorRef} className="orange-button" onClick={isMember ? () => navigate(`/afiliado/${codigo}`) : handleClick}>
-                        {isMember ? 'Ir a la Página de Afiliados de la agrupación' : 'Unirse'}
-                    </Button>
+                        <Button ref={anchorRef} className="orange-button" onClick={isMember ? () => navigate(`/afiliado/${codigo}`) : handleClick}>
+                            {isMember ? 'Ir a la Página de Afiliados de la agrupación' : 'Unirse'}
+                        </Button>
                         <Popover
                             open={open}
                             anchorEl={anchorRef.current}
@@ -139,35 +175,16 @@ function Agrupacion() {
                     </div>
                 </div>
                 <div className="right-block">
-                    <div className="comments">
-                        <h3>Comentarios de Miembros</h3>
-                        <div className="user-comment">
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <p className="name">Usuario 1</p>
-                                <p className="rating">
-                                    <Stack spacing={1}>
-                                        <Rating name="size-medium" defaultValue={2} />
-                                    </Stack>
-                                </p>
-                            </div>
-                            <div>
-                                <p>Excelente trabajo, ¡sigue así!</p>
-                            </div>
+                <div className="comments">
+                    <h3>Comentarios de Miembros</h3>
+                    {comments.map((comment, index) => (
+                        <div key={index} className="comment">
+                            <h4>{comment.nombreUsuario}</h4>
+                            <p>{comment.comentario}</p>
+                            <Rating name="read-only" value={comment.puntuacion} readOnly />
                         </div>
-                        <div className="user-comment">
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <p className="name">Usuario 2</p>
-                                <p className="rating">
-                                    <Stack spacing={1}>
-                                        <Rating name="size-medium" defaultValue={2} />
-                                    </Stack>
-                                </p>
-                            </div>
-                            <div>
-                                <p>Buen esfuerzo, ¡pero aún hay margen de mejora!</p>
-                            </div>
-                        </div>
-                    </div>
+                    ))}
+                </div>
                     <img className="image" src={clubImagen} alt="Imagen" />
                 </div>
             </div>
@@ -176,4 +193,5 @@ function Agrupacion() {
 }
 
 export default Agrupacion;
+
 
