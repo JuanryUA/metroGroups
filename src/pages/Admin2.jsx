@@ -35,8 +35,9 @@ export default function Admin2() {
   const [confirmar1, setConfirmar1] = useState(false);
   const [confirmar2, setConfirmar2] = useState(false);
   const [mensaje, setMensaje] = useState('');
-  const [agregarentrada, setAgregarEntrada] = useState('')
-  const [eliminarentrada, setEliminarEntrada] = useState('')
+  const [agregarentrada, setAgregarEntrada] = useState('');
+  const [eliminarentrada, setEliminarEntrada] = useState('');
+  const [agrupaciones, setAgrupaciones] = useState([]);
 
   useEffect(() => {
       if (!usuario) {
@@ -50,6 +51,19 @@ export default function Admin2() {
           });
       }
   }, [usuario, navegar]);
+
+  useEffect(() => {
+    const obtenerTiposAgrupaciones = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'agrupacion'));
+        const agrupaciones = querySnapshot.docs.map(doc => doc.data().nombre);
+        setAgrupaciones(agrupaciones);
+      } catch (error) {
+        console.error('Error al obtener las agrupaciones:', error);
+      }
+    };
+    obtenerTiposAgrupaciones();
+  }, []);
 
   const handleUnirseClick1 = () => {
     setConfirmar1(true);
@@ -163,29 +177,11 @@ export default function Admin2() {
             <Typography gutterBottom variant="h5" component="div">
               Dashboard Agrupaciones
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              -ARCA Unimet
-              <p></p>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              -Astromet
-              <p></p>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              -Fórmula SAE
-              <p></p>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              -MetroTech
-              <p></p>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              -The Orange Post
-              <p></p>
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              -Unimet Debate
-            </Typography>
+            {agrupaciones.map((agrupacion, index) => (
+              <Typography variant="body2" color="text.secondary" key={index} style={{ fontSize: '1.1rem', marginBottom: '8px' }}>
+                - {agrupacion}
+              </Typography>
+            ))}
           </CardContent>
           <CardActions>
             <Button size="small" onClick={() => navegar('/add-agrupacion', {replace: true})}>Agregar Agrupación</Button>
