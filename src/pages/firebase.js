@@ -21,5 +21,3 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);                // Aquí se encuentran todos los datos de la Firestore.
 export const auth = getAuth(app);
 export const storage = getStorage(app);
-
-
