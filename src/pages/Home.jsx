@@ -8,11 +8,12 @@ import	About from "../pages/About";
 export default function Home () {
     return (
 
-        <>
-         <NavBar />
-            <Carousel/><About /></>
-        <Footer />
-      </>
+    <>
+      <NavBar />
+      <Carousel />
+      <About />
+      <Footer />
+    </>
 
     )
     

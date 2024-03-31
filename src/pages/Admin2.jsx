@@ -27,7 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Admin2() {
   return (
-
+    <>
     <NavBarAdmin />
     <Box sx={{ flexGrow: 1 }}>
     <Grid container spacing={2}>
