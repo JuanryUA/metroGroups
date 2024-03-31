@@ -5,6 +5,8 @@ import { collection, getDocs, addDoc } from 'firebase/firestore';
 import { db } from './firebase';
 import NavBar from "../layouts/NavBar";
 import Footer from "../layouts/Footer";
+import { useUser } from "../user"; 
+import { validarAdmin } from "./adminvalidation";
 
 export default function AgregarAgrupacion() {
     const navegar = useNavigate();
@@ -21,6 +23,20 @@ export default function AgregarAgrupacion() {
     const url = /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i;
     const añoActual = new Date().getFullYear();
     const emailR = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const usuario = useUser();
+
+    useEffect(() => {
+        if (!usuario) {
+            navegar('/home', { replace: true });
+        } else {
+            const email = usuario.email;
+            validarAdmin(email).then(esAdmin => {
+                if (esAdmin !== true) {
+                    navegar('/home', { replace: true });
+                }
+            });
+        }
+    }, [usuario, navegar]);
 
     useEffect(() => {
       const obtenerTiposAgrupaciones = async () => {
@@ -157,7 +173,10 @@ export default function AgregarAgrupacion() {
               </select>            
               </div>
             </div>
-            <button className={styles.buttonA} type="submit" onClick={() => Agregar(nombre, mision, vision, objetivos, año, contacto, imagen)}>Agregar</button>
+            <div className={styles.buttonContainer}>
+              <button className={styles.buttonA} type="submit" onClick={() => Agregar(nombre, mision, vision, objetivos, año, contacto, imagen)}>Agregar</button>
+              <button className={styles.buttonA} type="submit" onClick={() => navegar('/admin2', {replace: true})}>Regresar</button>
+            </div>
             {error && <p className={styles.error}>{error}</p>}
           </div>
         </div>

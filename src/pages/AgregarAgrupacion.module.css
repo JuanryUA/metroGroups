@@ -90,8 +90,14 @@ form input {
     background-color: #C3C6CB;
 }
 
+.buttonContainer {
+    width: 400px;
+    display: flex;
+    gap: 10px;
+}
+
 .buttonA {
-    width: 70%;
+    width: 100%;
     height: 45px;
     padding: 10px;
     margin-bottom: 10px;

@@ -13,6 +13,9 @@ import { styled } from '@mui/material/styles';
 import DashboardImagenAdmin2 from "../assets/Admin2.png";
 import Footer from "../layouts/Footer";
 import { useNavigate } from 'react-router-dom';
+import { useUser } from "../user"; 
+import { useEffect } from "react";
+import { validarAdmin } from "./adminvalidation";
 
 
 
@@ -28,6 +31,20 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Admin2() {
   const navegar = useNavigate();
+  const usuario = useUser();
+
+  useEffect(() => {
+      if (!usuario) {
+          navegar('/home', { replace: true });
+      } else {
+          const email = usuario.email;
+          validarAdmin(email).then(esAdmin => {
+              if (esAdmin !== true) {
+                  navegar('/home', { replace: true });
+              }
+          });
+      }
+  }, [usuario, navegar]);
   return (
     <>
     <NavBarAdmin />
