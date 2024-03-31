@@ -71,17 +71,26 @@ export default function Admin2() {
     try {
       if (!agregarentrada.trim()) {
         setMensaje('La entrada no puede estar vacía');
+        setTimeout(() => {
+          setMensaje('');
+        }, 2000);
         return;
       }
       const entrada = agregarentrada.charAt(0).toUpperCase() + agregarentrada.slice(1);
       if (!isNaN(entrada)) {
         setMensaje('El valor introducido no puede ser un número');
+        setTimeout(() => {
+          setMensaje('');
+        }, 2000);
         return;
       }
       const q = query(collection(db, 'tiposagrupaciones'), where('clasificacion', '==', entrada));
       const querySnapshot = await getDocs(q);
       if (!querySnapshot.empty) {
           setMensaje('Esta entrada ya existe');
+          setTimeout(() => {
+            setMensaje('');
+          }, 2000);
           return;
       }
       await addDoc(collection(db, 'tiposagrupaciones'), { clasificacion: entrada });
@@ -93,6 +102,9 @@ export default function Admin2() {
       }, 2000);
   } catch (error) {
       setMensaje('Error al agregar la entrada:', error);
+      setTimeout(() => {
+        setMensaje('');
+      }, 2000);
   }
   };
 
@@ -100,6 +112,9 @@ export default function Admin2() {
     try {
       if (!eliminarentrada.trim()) {
         setMensaje('La entrada no puede estar vacía');
+        setTimeout(() => {
+          setMensaje('');
+        }, 2000);
         return;
       }
       const entrada = eliminarentrada.charAt(0).toUpperCase() + eliminarentrada.slice(1);
@@ -107,6 +122,9 @@ export default function Admin2() {
       const querySnapshot = await getDocs(q);
       if (querySnapshot.empty) {
         setMensaje('Esta entrada no existe');
+        setTimeout(() => {
+          setMensaje('');
+        }, 2000);
         return;
       }
       const docId = querySnapshot.docs[0].id;
@@ -119,6 +137,9 @@ export default function Admin2() {
       }, 2000);
     } catch (error) {
       setMensaje('Error al eliminar la entrada:', error);
+      setTimeout(() => {
+        setMensaje('');
+      }, 2000);
     }
   };
 
