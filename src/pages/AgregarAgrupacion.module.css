@@ -1,0 +1,133 @@
+.inicio{
+    display: flex;
+}
+
+.container1 {
+    margin: 90px;
+    background-color: #FFB465;
+    width: 100%;
+    max-width: 500px;
+    height: 100%; 
+    max-height: 1100px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+}
+
+h2{
+    font-size: 38px;
+    margin-top: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form p {
+    font-weight: bold;
+    margin-bottom: 5px; 
+}
+
+.tipoAgrupacionContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+
+.tipoAgrupacionContainer p{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+select {
+    width: 200px; 
+    height: 40px;
+    margin-bottom: 10px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transform: translate(0px, 5px);
+    transition: background-color 0.3s ease;
+}
+
+select:hover {
+    background-color: #C3C6CB; 
+    color: #333333; 
+    cursor: pointer;
+  }
+
+select:focus {
+    outline: none; 
+    border: 2px solid orange;
+}
+
+select option:checked {
+    background-color: orange; 
+    color: #fff; 
+}
+
+form input {
+    width: 400px;
+    height: 30px;
+    margin-bottom: 10px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.inicio button{
+    background-color: #ffffff;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+}
+
+.inicio button:hover {
+    background-color: #C3C6CB;
+}
+
+.buttonA {
+    width: 70%;
+    height: 45px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.form1{
+    margin-bottom: 20px;
+}
+
+.form2{
+    margin-bottom: 20px;
+}
+
+.container2 {
+    flex: 1;
+    background-image: url('../assets/fotounimetagrup.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.paragraph{
+    background-color: white;
+    width: 400px;
+    min-height: 30px; 
+    margin-bottom: 10px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: small;
+    resize: vertical; 
+    overflow: auto; 
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+  }

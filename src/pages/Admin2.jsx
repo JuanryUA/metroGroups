@@ -12,6 +12,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { styled } from '@mui/material/styles';
 import DashboardImagenAdmin2 from "../assets/Admin2.png";
 import Footer from "../layouts/Footer";
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -26,6 +27,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 
 export default function Admin2() {
+  const navegar = useNavigate();
   return (
     <>
     <NavBarAdmin />
@@ -71,7 +73,7 @@ export default function Admin2() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Agregar Agrupación</Button>
+            <Button size="small" onClick={() => navegar('/add-agrupacion', {replace: true})}>Agregar Agrupación</Button>
             <Button size="small">Eliminar Agrupación</Button>
             <Button size="small">Actualizar Cambios</Button>
           </CardActions>
