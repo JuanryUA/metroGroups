@@ -48,7 +48,7 @@ export default function AgrupacionCard({nombre, descripcion, imagen, llave}) {
             {descripcion}
           </Typography>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{justifyContent : "center"}}>
           <StyledButton 
             variant="contained" 
             size="big"
