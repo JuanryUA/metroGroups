@@ -42,7 +42,6 @@ export default function HomeCard() {
                 <StyledButton  
                 variant="contained" 
                 size="big"
-                onClick={() => navegar('/about')}
                 >Conoce mas</StyledButton>
         </CardActions>
 
