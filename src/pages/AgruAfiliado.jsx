@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { db } from './firebase.js';
-import { doc, getDoc, runTransaction } from "firebase/firestore";
+import { doc, getDoc, runTransaction, updateDoc} from "firebase/firestore";
 import './AgruAfiliado.css';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useParams } from 'react-router-dom';
-
+import { auth } from './firebase';
+import Stack from '@mui/material/Stack';
 
 function AgruAfiliado() {
     const [montoPagoDirecto, setMontoPagoDirecto] = useState('');
@@ -29,6 +30,65 @@ function AgruAfiliado() {
     const [imagen, setImagen] = useState('');
     const [mision, setMision] = useState('');
     const [nombre, setNombre] = useState('');
+    const [comment, setComment] = useState('');
+    const [rating, setRating] = useState(0);
+    const [, setUserName] = useState('');
+
+    const getCurrentUserId = () => {
+        const user = auth.currentUser;
+        return user ? user.uid : null;
+    };
+
+    const getCurrentUserName = async () => {
+        const user = auth.currentUser;
+        if (user) {
+            const userRef = doc(db, 'usuarios', user.uid);
+            const userSnap = await getDoc(userRef);
+            if (userSnap.exists()) {
+                return userSnap.data().nombrecompleto;
+            }
+        }
+        return null;
+    };
+
+    useEffect(() => {
+        const fetchUserName = async () => {
+            const userName = await getCurrentUserName();
+            setUserName(userName);
+        };
+        fetchUserName();
+    }, []);
+
+    const handleCommentSubmit = async () => {
+        try {
+            if (comment.trim() === '' || rating === 0) return;
+    
+            const userName = await getCurrentUserName();
+            if (!userName) return;
+    
+            const userRef = doc(db, 'usuarios', getCurrentUserId());
+            const userSnap = await getDoc(userRef);
+    
+            if (userSnap.exists()) {
+                const userData = userSnap.data();
+                let userComments = userData.Comentarios && userData.Comentarios[codigo] ? userData.Comentarios[codigo] : [];
+    
+                userComments.push({ comentario: comment, puntuacion: rating, nombreUsuario: userName });
+    
+                await updateDoc(userRef, {
+                    Comentarios: {
+                        ...userData.Comentarios,
+                        [codigo]: userComments
+                    }
+                });
+    
+                setComment('');
+                setRating(0);
+            }
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     useEffect(() => {
         const fetchClubData = async () => {
@@ -123,26 +183,48 @@ function AgruAfiliado() {
                 <p>Contacto: {contacto}</p>
             </div>
             <div className="top-block">
-                <div className="image-section"></div>
                 <div className="comments-section">
-                    <div className="username">
-                        Nombre de usuario:
+                    <div className="feedback-section">
+                        <h2>Feedback</h2>
+                        <p>El feedback es crucial para mejorar y crecer. ¡Comparte tu opinión con nosotros!</p>
                     </div>
-                    <div className="comment">
-                        <Box
-                            component="form"
-                            noValidate
-                            autoComplete="off"
+                    <div className="user-comment">
+                    <Box component="form" noValidate autoComplete="off" display="flex" flexDirection="column" alignItems="center">
+                        <TextField
+                            id="outlined-basic"
+                            label="Comentario"
+                            variant="outlined"
+                            className="comment-field"
+                            multiline
+                            rows={4}
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                        <div className="rating">
+                            PUNTUACIÓN: 
+                            <Stack spacing={1}>
+                                <Rating
+                                    name="simple-controlled"
+                                    value={rating}
+                                    onChange={(event, newValue) => {
+                                        setRating(newValue);
+                                    }}
+                                />
+                            </Stack>
+                        </div>
+                        <Button 
+                            variant="contained" 
+                            className="comment-button" 
+                            onClick={handleCommentSubmit} 
+                            style={{backgroundColor: 'orange', color: 'white', marginTop: '1rem'}}
                         >
-                            <TextField id="outlined-basic" label="Comentario" variant="outlined" className="comment-field" multiline rowsMax={4}/>
-                        </Box>
+                            Enviar comentario
+                        </Button>
+                    </Box>
                     </div>
-                    <div className="rating">
-                        PUNTUACIÓN: 
-                        <Stack spacing={1}>
-                            <Rating name="size-medium" defaultValue={2} />
-                        </Stack>
-                    </div>
+                </div>
+                <div className="image-section">
+                    <img src="https://pbs.twimg.com/media/GFViX5bWQAAFucW?format=jpg&name=4096x4096" alt="Imagen Unimet" />
                 </div>
             </div>
             <div className="title-container">

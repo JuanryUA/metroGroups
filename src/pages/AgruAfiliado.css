@@ -6,28 +6,48 @@
 
 .top-block {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+}
+
+.feedback-section {
+    text-align:justify;
+    margin: 0 auto; 
+    max-width: 600px; 
+    align-items: center;
+    align-self: center;
 }
 
 .comments-section {
+    width: 50%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .rating {
     display: flex;
     align-items: center;
+    margin-top: 10px; 
 }
-
-
 
 .image-section {
     width: 50%;
-    background-image: url('https://univnoticias.com/wp-content/uploads/2021/04/Estudiantes-de-la-UNIMET.jpg');
-    background-size: cover;
+    height: 100%; /* Ajusta la altura según tus necesidades */
+    background-size: cover; /* Ajusta el tamaño de la imagen */
     background-position: center;
+    background-repeat: no-repeat; /* Asegura que la imagen no se repita */
+    background-color: rgba(255, 115, 0, 0.705);
+    height: 100vh;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    align-self: center;
 }
 
 .title-container {
@@ -119,6 +139,7 @@
     justify-content: center;
     align-items: center;
     font-family: 'Roboto Serif', serif;
+    margin-bottom: 20px; /* Añadido */
 }
 
 .background-image h1 {
@@ -162,3 +183,72 @@
     filter: blur(10px);
     z-index: -1;
 }
+
+.top-block,
+.background-image,
+.title-container {
+    margin: 0;
+}
+
+
+.user-comment {
+    background-color: transparent; 
+    width: 70%;
+}
+
+.feedback-section h2 {
+    text-align: center;
+}
+
+.comment-field {
+    width: 100%; /* Ajusta el ancho al 100% del contenedor */
+    margin-bottom: 20px; /* Espacio entre los campos de comentario */
+}
+
+.MuiFormControl-root.MuiTextField-root.comment-field.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .background-image h1 {
+        color: rgb(255, 255, 255);
+        font-size: 5em;
+        text-shadow: 2px 2px 100px rgba(0, 0, 0, 0.5);
+        font-family: 'Roboto Serif', serif;
+        font-weight: 600;
+        font-style: italic;
+        margin-bottom: 0; /* Ajusta este valor según tus necesidades */
+    }
+    
+    .background-image h2 {
+        color: rgb(255, 255, 255);
+        text-align: center;
+        font-size: 2em;
+        font-family: 'Roboto Serif', serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin-top: 0; /* Ajusta este valor según tus necesidades */
+    }
+    .comments-section, .image-section, .left-bottom-block, .right-bottom-block {
+        width: 100%;
+    }
+
+    .top-block, .bottom-container {
+        flex-direction: column;
+    }
+
+    .input-field {
+        width: calc(90% - 24px);
+    }
+
+    .realizar-pago, .paypal-button {
+        width: 80%;
+    }
+
+    .user-comment {
+        width: 90%;
+    }
+}
+
