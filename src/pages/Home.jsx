@@ -7,7 +7,12 @@ import	About from "../pages/About";
 
 export default function Home () {
     return (
-        <><Carousel /><About /></>
+
+        <>
+         <NavBar />
+            <Carousel/><About /></>
+        <Footer />
+      </>
 
     )
     

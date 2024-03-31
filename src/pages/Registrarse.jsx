@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Registro } from './auth';
 import { RegistroPorGoogle } from './auth';
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
 
 export default function Registrarse() {
     const [nombrecompleto, setNombreCompleto] = useState('');
@@ -51,6 +53,8 @@ export default function Registrarse() {
     };
 
     return (
+      <>
+      <NavBar />
       <div className={styles.inicio}>
           <div className={styles.container}>
           <h2>Registro</h2>
@@ -77,6 +81,7 @@ export default function Registrarse() {
           <button className={styles.buttonI} onClick={() => navegar('/login', {replace: true})}>Inicio Sesión</button>
           </div>
       </div>
-  
+      <Footer />
+      </>
     );
   }

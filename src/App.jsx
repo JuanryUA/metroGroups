@@ -27,7 +27,7 @@ function App() {
     <>
       <div>
         <BrowserRouter>
-          <NavBar />
+          {/* <NavBar /> */}
           <Routes>
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
@@ -44,7 +44,7 @@ function App() {
             <Route path="/admin2" element={<Admin2/>}></Route>
 
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </BrowserRouter>
       </div>
     </>
