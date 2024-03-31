@@ -246,13 +246,7 @@ function EditarUser() {
               onChange={(e) => setNombre(e.target.value)}
             />
 
-            <input
-              type="email"
-              name="correo"
-              placeholder="Correo electrónico"
-              value={correo}
-              onChange={(e) => setCorreo(e.target.value)}
-            />
+
             <input
               type="text"
               name="phone"
