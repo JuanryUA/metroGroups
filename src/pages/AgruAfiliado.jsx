@@ -11,6 +11,8 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useParams } from 'react-router-dom';
 import { auth } from './firebase';
 import Stack from '@mui/material/Stack';
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
 
 function AgruAfiliado() {
     const [montoPagoDirecto, setMontoPagoDirecto] = useState('');
@@ -173,6 +175,8 @@ function AgruAfiliado() {
     };
 
     return (
+        <>
+        <NavBar />
         <div className="AgruAfiliado">
             <div className="background-image">
                 <div className="background-blur" style={{ backgroundImage: `url(${imagen})` }}></div>
@@ -273,6 +277,8 @@ function AgruAfiliado() {
                 </div>
             </div>
         </div>
+        <Footer />
+        </>
     );
 }
 

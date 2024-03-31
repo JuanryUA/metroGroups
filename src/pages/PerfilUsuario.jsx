@@ -3,6 +3,8 @@ import { getFirestore, getDoc, doc } from "firebase/firestore";
 import styles from "./PerfilUsuario.module.css";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../user";
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
 
 export default function PerfilUsuario() {
   const [data, setData] = useState();
@@ -44,7 +46,8 @@ export default function PerfilUsuario() {
   }
 
   return (
-
+    <>
+    <NavBar />
     <body className={styles.body}>
       
       <div className={styles.box}>
@@ -82,6 +85,7 @@ export default function PerfilUsuario() {
       </div>
       
     </body>
-    
+    <Footer />
+      </>
   );
 }

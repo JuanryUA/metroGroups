@@ -5,11 +5,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from "../assets/avatar.png";
+import { Link } from "react-router-dom";
 
 import { styled } from '@mui/material/styles';
 const StyledCard = styled(Card)`
 max-width: 100% ; 
-height: 600px; 
+height: 790px; 
 background-color : #F4EDCC; 
 padding : 2px; margin : 2px; 
 border-widht: 2px; 
@@ -25,29 +26,38 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export default function AgrupacionCard({nombre, descripcion, imagen}) {
+export default function AgrupacionCard({nombre, descripcion, imagen, llave}) {
 
   const testIMG = imagen
+  const agrup = llave
+ 
 
     return(
-        <StyledCard>
+      <StyledCard sx={{flexGrow: 1}}>
         <CardMedia
-      sx={{ height: 425 }}
-      image={testIMG}
-    >
+          sx={{ height: 530 }}
+          image={testIMG}
+        >
 
-    </CardMedia>
-    <CardContent>
-      <Typography gutterBottom variant="h5" component="div">
-        {nombre}
-      </Typography>
-      <Typography variant="body2" color="text.secondary">
-        {descripcion}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <StyledButton variant="contained" size="big">Conoce mas</StyledButton>
-    </CardActions>
-          </StyledCard>
+        </CardMedia>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {nombre}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {descripcion}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <StyledButton 
+            variant="contained" 
+            size="big"
+            key={agrup}
+            component={Link}
+            to={`/agrupacion/${agrup}`}
+
+            >Conoce mas</StyledButton>
+        </CardActions>
+      </StyledCard>
     )
 }

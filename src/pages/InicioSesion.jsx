@@ -4,6 +4,8 @@ import { Logearse, RegistroPorGoogle, validarInicioSesion } from './auth';
 import { useState, useEffect } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from './firebase';
+import NavBar from "../layouts/NavBar";
+import Footer from "../layouts/Footer";
 
 export default function InicioSesion() {
     const navegar = useNavigate();
@@ -74,6 +76,9 @@ export default function InicioSesion() {
   };
 
     return (
+      <>
+      <NavBar />
+
       <div className={styles.inicio}>
         <div className={styles.container1}>
           <h2>Iniciar Sesión</h2>
@@ -116,5 +121,7 @@ export default function InicioSesion() {
         </div>
         <div className={styles.container2}></div>
       </div>
+      <Footer />
+      </>
     );
   }

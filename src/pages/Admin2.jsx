@@ -11,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Unstable_Grid2';
 import { styled } from '@mui/material/styles';
 import DashboardImagenAdmin2 from "../assets/Admin2.png";
+import Footer from "../layouts/Footer";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -25,6 +26,8 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Admin2() {
   return (
+    <>
+    <NavBarAdmin />
     <Box sx={{ flexGrow: 1 }}>
     <Grid container spacing={2}>
     <Grid xs={6}>
@@ -125,8 +128,8 @@ export default function Admin2() {
           </Grid>
           </Grid>
     </Box>
-    
-    
+    <Footer />
+    </>
   );
 }
 
