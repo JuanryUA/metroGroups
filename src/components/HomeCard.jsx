@@ -42,6 +42,7 @@ export default function HomeCard() {
                 <StyledButton  
                 variant="contained" 
                 size="large"
+                onClick={() => window.scrollTo({top: 950, behavior:"smooth"})}
                 >Conoce mas</StyledButton>
         </CardActions>
 

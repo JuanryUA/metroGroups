@@ -34,6 +34,7 @@ export default function Admin2() {
   const [confirmar1, setConfirmar1] = useState(false);
   const [confirmar2, setConfirmar2] = useState(false);
   const [mensaje, setMensaje] = useState('');
+
   const [agregarentrada, setAgregarEntrada] = useState('')
   const [eliminarentrada, setEliminarEntrada] = useState('')
   const [agrupaciones, setAgrupaciones] = useState([]);
@@ -58,6 +59,19 @@ export default function Admin2() {
   
       obtenerAgrupaciones();
   }, [usuario, navegar]);
+
+  useEffect(() => {
+    const obtenerTiposAgrupaciones = async () => {
+      try {
+        const querySnapshot = await getDocs(collection(db, 'agrupacion'));
+        const agrupaciones = querySnapshot.docs.map(doc => doc.data().nombre);
+        setAgrupaciones(agrupaciones);
+      } catch (error) {
+        console.error('Error al obtener las agrupaciones:', error);
+      }
+    };
+    obtenerTiposAgrupaciones();
+  }, []);
 
   const handleUnirseClick1 = () => {
     setConfirmar1(true);
@@ -169,6 +183,7 @@ export default function Admin2() {
             }}
             title="Dashboard Agrupaciones"
           />
+
             <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <Typography gutterBottom variant="h5" component="div">
                 Dashboard Agrupaciones
@@ -210,6 +225,7 @@ export default function Admin2() {
             </Button>
             </CardActions>
           </Card>
+
         </Item>
       </Grid>
 
