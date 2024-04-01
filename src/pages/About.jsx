@@ -22,6 +22,14 @@ const StyledCardContent = styled(CardContent)`
   height: auto;
 `;
 
+const StyledButton = styled(Button)`
+  margin-right: 8px; 
+  background-color: #FDA403;  
+  &:hover {
+    background-color: #222831;
+  }
+`;
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -119,8 +127,8 @@ export default function About() {
                   ))}
                 </List>
               </CardContent>
-              <CardActions>
-                <Button size="big" sx={{ width: '100%' }}>CREAR AGRUPACIÓN</Button>
+              <CardActions sx={{justifyContent : "center"}}>
+                <StyledButton variant="contained" size="big" sx={{ width: '100%' }}>CREAR AGRUPACIÓN</StyledButton>
               </CardActions>
             </Card>
           </Grid>
