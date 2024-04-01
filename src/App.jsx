@@ -42,7 +42,7 @@ function App() {
             <Route path="/register" element={<Registrarse />}></Route>
             <Route path="/profile" element={<PerfilUsuario />}></Route>
             <Route path="/edit-user" element={<Editar tipo='user'/>}></Route>
-            <Route path="/edit-agrupacion" element={<Editar tipo='agrupacion'/>}></Route>
+            <Route path="/edit-agrupacion/:codigo" element={<Editar tipo='agrupacion'/>}></Route>
             <Route path="/admin2" element={<Admin2/>}></Route>
             <Route path="/add-agrupacion" element={<AgregarAgrupacion/>}></Route>
             <Route path="/eliminar-agrupacion" element={<EliminarAgrupacion />} />

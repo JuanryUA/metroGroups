@@ -13,7 +13,7 @@
   margin-right: 10%;
   margin-top: 2%;
   border-radius: 12px;
-  width: 55%;
+  width:55%;
   height: 80%;
   box-shadow: 0px 4px 12px gray;
 }
@@ -38,6 +38,7 @@
   padding: 20px;
   background: white;
   border-radius: 25px;
+  box-shadow: 0px 4px 8px rgb(71, 70, 70);
 }
 .seccion2 {
   display: flex;
@@ -58,6 +59,7 @@
   margin: 8%;
   margin-top: 0%;
   margin-bottom: 3%;
+  box-shadow: 0px 4px 8px rgb(84, 81, 81);
 }
 
 .Display button {

@@ -29,7 +29,7 @@ export async function findGroup(groupName){
     for (let index = 0; index < groupsArray.length; index++) {
         const objeto = groupsArray[index];                                  // Esta función retorna la key de una agrupación si le pasas
         if (objeto.value.nombre === groupName) {                            // un nombre por parámetro. Si no la encuentra, devuelve null
-            groupId = objeto.key;
+            groupId = objeto?.key;
             break
         }
     }

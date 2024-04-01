@@ -25,7 +25,7 @@ export default function Footer() {
   return (
 
 
-        <Toolbar sx={{ mt : 4, backgroundColor: "#FFC374", paddingBottom:'1%'}}>
+        <Toolbar sx={{ mt : 4, backgroundColor: "#FFC374", paddingBottom:'10%' }}>
             <Box flexGrow={1}>
                 Copyright 2024 - Universidad Metropolitana 
                 Todos los derechos reservados

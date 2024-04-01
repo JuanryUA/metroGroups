@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PerfilUsuarioEdit.module.css";
 import estilos from "./EditarAgrupacion.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useUser } from "../user.js";
 import { collection, doc } from "firebase/firestore";
@@ -9,17 +9,23 @@ import { db } from "./firebase.js";
 import { updateDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import { getFirestore, getDoc, onSnapshot } from "firebase/firestore";
+import NavBar from "../layouts/NavBar.jsx"
+import Footer from "../layouts/Footer.jsx"
+
 
 export default function Editar(props) {
+  const {codigo} = useParams();
+
   if (props.tipo == "user") {
     return EditarUser();
   } else if (props.tipo == "agrupacion") {
-    return EditarAgrupacion();
+    return EditarAgrupacion(codigo);
   }
 }
 
-function EditarAgrupacion() {
-  const IdAgrupacion = "gLrrRL5Dz8xznwpGlKZp";
+function EditarAgrupacion(codigo) {
+
+  const IdAgrupacion = codigo;
   const [data, setData] = useState();
   const navegar = useNavigate();
   const [update, setUpdate] = useState("");
@@ -227,6 +233,8 @@ function EditarUser() {
   };
 
   return (
+    <>
+    <NavBar />
     <body className={styles.body}>
       <div className={styles.box}>
         <section className={styles.seccion1}>
@@ -267,5 +275,7 @@ function EditarUser() {
         </section>
       </div>
     </body>
+    <Footer />
+    </>
   );
 }
