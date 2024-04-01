@@ -1,4 +1,3 @@
-import * as React from 'react';
 import NavBarAdmin from "../layouts/NavBarAdmin";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -14,7 +13,7 @@ import DashboardImagenAdmin2 from "../assets/Admin2.png";
 import Footer from "../layouts/Footer";
 import { useNavigate } from 'react-router-dom';
 import { useUser } from "../user"; 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { validarAdmin } from "./adminvalidation";
 import { collection, query, where, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';
 import { db } from './firebase';
@@ -35,8 +34,9 @@ export default function Admin2() {
   const [confirmar1, setConfirmar1] = useState(false);
   const [confirmar2, setConfirmar2] = useState(false);
   const [mensaje, setMensaje] = useState('');
-  const [agregarentrada, setAgregarEntrada] = useState('');
-  const [eliminarentrada, setEliminarEntrada] = useState('');
+
+  const [agregarentrada, setAgregarEntrada] = useState('')
+  const [eliminarentrada, setEliminarEntrada] = useState('')
   const [agrupaciones, setAgrupaciones] = useState([]);
 
   useEffect(() => {
@@ -50,6 +50,14 @@ export default function Admin2() {
               }
           });
       }
+      const obtenerAgrupaciones = async () => {
+        const agrupacionesCol = collection(db, 'agrupacion');
+        const agrupacionesSnapshot = await getDocs(agrupacionesCol);
+        const agrupacionesList = agrupacionesSnapshot.docs.map(doc => doc.data().nombre);
+        setAgrupaciones(agrupacionesList);
+      };
+  
+      obtenerAgrupaciones();
   }, [usuario, navegar]);
 
   useEffect(() => {
@@ -160,118 +168,133 @@ export default function Admin2() {
   return (
     <>
     <NavBarAdmin />
-    <Box sx={{ flexGrow: 1 }}>
-    <Grid container spacing={2}>
-    <Grid xs={6}>
-    <Item>
-        <Card sx={{ maxWidth: 345, marginRight: "20px" }}>
-        <Typography gutterBottom variant="h5" component="div">
-              Dashboard Agrupaciones
-            </Typography>
+    <Box sx={{ flexGrow: 1, height: 'calc(100vh - 100px)', backgroundImage: `url(https://img.freepik.com/premium-photo/glowing-shimmering-stars-space-abstract-background_250994-1378.jpg?size=626&ext=jpg&ga=GA1.1.1687694167.1711843200&semt=ais)`, backgroundSize: 'fit', marginButton: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <Grid container spacing={2} sx={{ justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
+      <Grid xs={6} sx={{ alignSelf: 'center', color: 'black', backgroundColor: 'transparent' }}>
+        <Item sx={{backgroundColor: 'transparent' }}>
+          <Card sx={{ maxWidth: 345, marginRight: "20px", backgroundColor: 'orange', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
           <CardMedia
-            sx={{ height: 140 }}
-            
+            sx={{ 
+              alignElements: 'center',
+              height: 140,
+              width: 250,
+              marginTop: 2, 
+              backgroundImage: `url("https://pbs.twimg.com/media/GD5GiP6W8AAcmly.jpg:large")` 
+            }}
             title="Dashboard Agrupaciones"
           />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Dashboard Agrupaciones
-            </Typography>
-            {agrupaciones.map((agrupacion, index) => (
-              <Typography variant="body2" color="text.secondary" key={index} style={{ fontSize: '1.1rem', marginBottom: '8px' }}>
-                - {agrupacion}
+
+            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+              <Typography gutterBottom variant="h5" component="div">
+                Dashboard Agrupaciones
               </Typography>
-            ))}
-          </CardContent>
-          <CardActions>
-            <Button size="small" onClick={() => navegar('/add-agrupacion', {replace: true})}>Agregar Agrupación</Button>
-            <Button size="small">Eliminar Agrupación</Button>
-            <Button size="small">Actualizar Cambios</Button>
-          </CardActions>
-        </Card>
+              <Typography variant="body2" color="text.secondary" sx={{alignSelf:'center', backgroundColor: 'white', padding: '10px' }}>
+                {agrupaciones.map(agrupacion => (
+                  <React.Fragment key={agrupacion}>
+                    -{agrupacion}
+                    <p></p>
+                  </React.Fragment>
+                ))}
+              </Typography>
+            </CardContent>
+            <CardActions sx={{ justifyContent: 'center' }}>
+            <Button 
+              size="small" 
+              onClick={() => navegar('/add-agrupacion', {replace: true})} 
+              sx={{
+                backgroundColor: 'white', 
+                color: 'black', 
+                '&:hover': {
+                  backgroundColor: 'lightgray', // Cambia 'blue' al color que prefieras
+                }
+              }}
+            >
+              Agregar Agrupación
+            </Button>
+            <Button 
+              size="small" 
+              sx={{
+                backgroundColor: 'white', 
+                color: 'black', 
+                '&:hover': {
+                  backgroundColor: 'lightgray', 
+                }
+              }}
+            >
+              Eliminar Agrupación
+            </Button>
+            </CardActions>
+          </Card>
+
         </Item>
-        </Grid> 
+      </Grid>
 
 
 
         {/* Segunda carta */}
           
-          <Grid xs={6}>
-          <Item>
-          <Card sx={{ maxWidth: 5000, maxHeight: 5000, overflow: 'auto' }}>
-          
-            <CardContent>
+        <Grid xs={6} sx={{ alignSelf: 'center', color: 'white' }}>
+          <Card sx={{ maxWidth: 5000, maxHeight: 5000, marginRight: "20px", backgroundColor: 'orange', color: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            <CardMedia
+              component="img"
+              image={DashboardImagenAdmin2}
+              title="Dashboard de tipos"
+            />
+            <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <Typography gutterBottom variant="h5" component="div">
                 Dashboard de tipos
-              
               </Typography>
-              
             </CardContent>
-            
-            <CardMedia image={DashboardImagenAdmin2} sx={{height:300}}>
-            
-            </CardMedia>
-          
-            <Grid container spacing={2}>
-            <Grid xs={6}>
-          <div style={{ marginTop: "20px", display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-            <h5 style={{ fontWeight: "bold", marginBottom: "10px", fontSize: "20px" }}>Otros</h5>
-            <h5 style={{ fontWeight: "bold", marginBottom: "10px" }}>Artes y Creatividad</h5>
-            <h5 style={{ fontWeight: "bold", marginBottom: "10px" }}>Negocios</h5>
-            <h5 style={{ fontWeight: "bold", marginBottom: "10px" }}>Tecnologías</h5>
-            <h5 style={{ fontWeight: "bold", marginBottom: "10px" }}>ETC</h5>
-            </div>
-            </Grid>
-            <Grid xs={6}>
-            
-            <div style={{ display: "flex", flexDirection: "column", marginRight: "30px" }}>
-              <Button variant="contained" color="primary" size="small" onClick={handleUnirseClick1} style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
-              Crear Entrada
+            <CardActions sx={{ justifyContent: 'center' }}>
+              <Button 
+                variant="contained" 
+                color="primary" 
+                size="small" 
+                onClick={handleUnirseClick1} 
+                sx={{
+                  backgroundColor: 'white', 
+                  color: 'black', 
+                  marginBottom: "5px",
+                  '&:hover': {
+                    backgroundColor: 'lightgray', 
+                  }
+                }}
+              >
+                Crear Entrada
               </Button>
-              <Button variant="contained" color="primary" size="small" onClick={handleUnirseClick2} style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
-              Eliminar Entradas
+              <Button 
+                variant="contained" 
+                color="primary" 
+                size="small" 
+                onClick={handleUnirseClick2} 
+                sx={{
+                  backgroundColor: 'white', 
+                  color: 'black', 
+                  marginBottom: "5px",
+                  '&:hover': {
+                    backgroundColor: 'lightgray', 
+                  }
+                }}
+              >
+                Eliminar Entradas
               </Button>
-              <Button variant="contained" color="primary" size="small" style={{ backgroundColor: "black", color: "white" }}>
-              Actualizar Cambios
+              <Button 
+                variant="contained" 
+                color="primary" 
+                size="small" 
+                sx={{
+                  backgroundColor: 'white', 
+                  color: 'black', 
+                  '&:hover': {
+                    backgroundColor: 'lightgray', 
+                  }
+                }}
+              >
+                Actualizar Cambios
               </Button>
-              {confirmar1 && (
-                        <div>
-                          <form onSubmit={agregarEntrada}> 
-                            <input
-                              className={styles.inpu}
-                              type="text"
-                              placeholder="Introduzca la entrada a agregar"
-                              value={agregarentrada}
-                              onChange={(e) => setAgregarEntrada(e.target.value)}
-                            />
-                          </form>                        
-                          <button className={styles.buttonconfirmar} onClick={() => agregarEntrada()} type="submit">Confirmar</button>
-                          <button className={styles.buttoncancelar} onClick={handleCancelar1}>Cancelar</button>
-                          {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
-                        </div>
-                    )}
-              {confirmar2 && (
-                      <div>
-                        <form onSubmit={eliminarEntrada}>
-                          <input
-                              className={styles.inpu}
-                              type="text"
-                              placeholder="Introduzca la entrada a eliminar"
-                              value={eliminarentrada}
-                              onChange={(e) => setEliminarEntrada(e.target.value)}
-                          />
-                        </form>                         
-                        <button className={styles.buttonconfirmar} onClick={() => eliminarEntrada()} type="submit">Confirmar</button>
-                        <button className={styles.buttoncancelar} onClick={handleCancelar2}>Cancelar</button>
-                        {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
-                      </div>
-                    )}
-            </div>
-            </Grid>
-          </Grid>
+            </CardActions>
           </Card>
-          </Item>
-          </Grid>
+        </Grid>
           </Grid>
     </Box>
 

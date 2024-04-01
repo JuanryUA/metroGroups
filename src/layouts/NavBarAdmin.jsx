@@ -45,13 +45,12 @@ export default function SearchAppBar() {
 
       <AppBar position="static">
         <Toolbar sx={{backgroundColor: "#000000"}}>
- 
-          <Button
-            variant='text'
-            href='/admin'
-          >
-            <img src={ULogo} alt="my image"  />
-            </Button>
+        <Button
+          variant='text'
+          onClick={() => navegar('/admin')}
+        >
+          <img src={ULogo} alt="my image" />
+        </Button>
           <Typography sx={{ flexGrow: 1 }} />
           <StyledButton variant='contained' onClick={handleCerrarSesion}>
               Cerrar Sesion

@@ -127,9 +127,7 @@ export default function About() {
                   ))}
                 </List>
               </CardContent>
-              <CardActions sx={{justifyContent : "center"}}>
-                <StyledButton variant="contained" size="big" sx={{ width: '100%' }}>CREAR AGRUPACIÓN</StyledButton>
-              </CardActions>
+
             </Card>
           </Grid>
       </Box>
