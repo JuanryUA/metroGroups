@@ -3,6 +3,7 @@ import { db } from './firebase.js';
 import { doc, getDoc, runTransaction, updateDoc} from "firebase/firestore";
 import './AgruAfiliado.css';
 import Box from '@mui/material/Box';
+import Popover from '@mui/material/Popover';
 import TextField from '@mui/material/TextField';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
@@ -35,11 +36,25 @@ function AgruAfiliado() {
     const [comment, setComment] = useState('');
     const [rating, setRating] = useState(0);
     const [, setUserName] = useState('');
+    const [show, setShow] = useState(false);
 
     const getCurrentUserId = () => {
         const user = auth.currentUser;
         return user ? user.uid : null;
     };
+
+    const handleClick = () => {
+        setShow(true);
+        setTimeout(() => setShow(false), 2000); // Ocultar el popover después de 2 segundos
+    };
+    
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Content>
+                Mensaje enviado
+            </Popover.Content>
+        </Popover>
+    );
 
     const getCurrentUserName = async () => {
         const user = auth.currentUser;
@@ -90,6 +105,7 @@ function AgruAfiliado() {
         } catch (error) {
             console.log(error.message);
         }
+        handleClick();
     };
 
     useEffect(() => {
@@ -173,6 +189,8 @@ function AgruAfiliado() {
         setMontoPagoPaypal(value);
         setPaypalValido(!!value);
     };
+
+
 
     return (
         <>
