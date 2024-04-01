@@ -213,7 +213,7 @@ export default function Admin2() {
             </Button>
             <Button 
               size="small" 
-              onClick={eliminarEntrada} // Aquí llamamos a la función para eliminar entradas
+              onClick={() => navegar('/eliminar-agrupacion', {replace: true})}
               sx={{
                 backgroundColor: 'white', 
                 color: 'black', 
@@ -226,7 +226,6 @@ export default function Admin2() {
             </Button>
             </CardActions>
           </Card>
-
         </Item>
       </Grid>
 
