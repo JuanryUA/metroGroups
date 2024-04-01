@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { getDocs, collection, addDoc, getDoc, deleteDoc, doc } from "@firebase/firestore";
+import { getDocs, collection, getDoc, deleteDoc, doc } from "@firebase/firestore";
 
 export async function getGroupsArray(){
     const agrupaciones = [];
@@ -24,14 +24,16 @@ export async function getGroupsNames(){
 }
 
 export async function findGroup(groupName){
-    const groupsArray = getGroupsArray();
+    const groupsArray = await getGroupsArray();
     let groupId = null;
     for (let index = 0; index < groupsArray.length; index++) {
         const objeto = groupsArray[index];                                  // Esta función retorna la key de una agrupación si le pasas
         if (objeto.value.nombre === groupName) {                            // un nombre por parámetro. Si no la encuentra, devuelve null
             groupId = objeto.key;
+            break
         }
     }
+
     return groupId;
 }
 
@@ -44,21 +46,25 @@ export async function getGroup(groupId){
 
 export async function deleteGroupByKey(groupKey) {
     try {
+        if (!groupKey) {
+            throw new Error("La clave de la agrupación es nula o indefinida.");
+        }
+
         const groupRef = doc(db, 'agrupacion', groupKey);
         const groupDoc = await getDoc(groupRef);
         
         if (!groupDoc.exists()) {
             alert("La agrupación no existe.");
-            return;
+            return false;
         }
 
         const miembros = groupDoc.data().miembros || [];                            // Eliminar agrupación si está vacía a través de su key
 
         if (miembros.length === 0) {
             await deleteDoc(groupRef);
-            alert("Agrupación eliminada satisfactoriamente.");
+            return true;
         } else {
-            alert("Eliminación interrumpida. La agrupación tiene integrantes.");
+            return false;
         }
     } catch (error) {
         alert("Error al eliminar la agrupación. Detalles del error en consola.");

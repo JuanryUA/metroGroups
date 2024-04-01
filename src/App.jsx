@@ -18,6 +18,7 @@ import PerfilUsuario from "./pages/PerfilUsuario"
 import Editar from "./pages/Editar";
 import Admin2 from "./pages/Admin2";
 import AgregarAgrupacion from "./pages/AgregarAgrupacion";
+import EliminarAgrupacion from "./pages/EliminarAgrupacion";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
             <Route path="/edit-agrupacion" element={<Editar tipo='agrupacion'/>}></Route>
             <Route path="/admin2" element={<Admin2/>}></Route>
             <Route path="/add-agrupacion" element={<AgregarAgrupacion/>}></Route>
+            <Route path="/eliminar-agrupacion" element={<EliminarAgrupacion />} />
           </Routes>
           {/* <Footer /> */}
         </BrowserRouter>
