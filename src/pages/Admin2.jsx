@@ -185,8 +185,7 @@ export default function Admin2() {
           </CardContent>
           <CardActions>
             <Button size="small" onClick={() => navegar('/add-agrupacion', {replace: true})}>Agregar Agrupación</Button>
-            <Button size="small">Eliminar Agrupación</Button>
-            <Button size="small">Actualizar Cambios</Button>
+            <Button size="small" onClick={() => navegar('/eliminar-agrupacion', {replace: true})}>Eliminar Agrupación</Button>
           </CardActions>
         </Card>
         </Item>
@@ -230,9 +229,6 @@ export default function Admin2() {
               </Button>
               <Button variant="contained" color="primary" size="small" onClick={handleUnirseClick2} style={{ marginBottom: "5px", backgroundColor: "black", color: "white" }}>
               Eliminar Entradas
-              </Button>
-              <Button variant="contained" color="primary" size="small" style={{ backgroundColor: "black", color: "white" }}>
-              Actualizar Cambios
               </Button>
               {confirmar1 && (
                         <div>
