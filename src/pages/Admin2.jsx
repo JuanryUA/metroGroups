@@ -213,7 +213,7 @@ export default function Admin2() {
             </Button>
             <Button 
               size="small" 
-              onClick={() => navegar('/eliminar-agrupacion', {replace: true})
+              onClick={() => navegar('/eliminar-agrupacion', {replace: true})}
               sx={{
                 backgroundColor: 'white', 
                 color: 'black', 
