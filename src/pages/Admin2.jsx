@@ -213,6 +213,7 @@ export default function Admin2() {
             </Button>
             <Button 
               size="small" 
+              onClick={eliminarEntrada} // Aquí llamamos a la función para eliminar entradas
               sx={{
                 backgroundColor: 'white', 
                 color: 'black', 
@@ -245,54 +246,86 @@ export default function Admin2() {
                 Dashboard de tipos
               </Typography>
             </CardContent>
-            <CardActions sx={{ justifyContent: 'center' }}>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                size="small" 
-                onClick={handleUnirseClick1} 
-                sx={{
-                  backgroundColor: 'white', 
-                  color: 'black', 
-                  marginBottom: "5px",
-                  '&:hover': {
-                    backgroundColor: 'lightgray', 
-                  }
-                }}
-              >
-                Crear Entrada
-              </Button>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                size="small" 
-                onClick={handleUnirseClick2} 
-                sx={{
-                  backgroundColor: 'white', 
-                  color: 'black', 
-                  marginBottom: "5px",
-                  '&:hover': {
-                    backgroundColor: 'lightgray', 
-                  }
-                }}
-              >
-                Eliminar Entradas
-              </Button>
-              <Button 
-                variant="contained" 
-                color="primary" 
-                size="small" 
-                sx={{
-                  backgroundColor: 'white', 
-                  color: 'black', 
-                  '&:hover': {
-                    backgroundColor: 'lightgray', 
-                  }
-                }}
-              >
-                Actualizar Cambios
-              </Button>
-            </CardActions>
+            <CardActions>
+    <Button 
+      variant="contained" 
+      color="primary" 
+      size="small" 
+      onClick={handleUnirseClick1} 
+      sx={{
+        backgroundColor: 'white', 
+        color: 'black', 
+        marginBottom: "5px",
+        '&:hover': {
+          backgroundColor: 'lightgray', 
+        }
+      }}
+    >
+      Crear Entrada
+    </Button>
+    <Button 
+      variant="contained" 
+      color="primary" 
+      size="small" 
+      onClick={handleUnirseClick2} 
+      sx={{
+        backgroundColor: 'white', 
+        color: 'black', 
+        marginBottom: "5px",
+        '&:hover': {
+          backgroundColor: 'lightgray', 
+        }
+      }}
+    >
+      Eliminar Entradas
+    </Button>
+    {confirmar1 && (
+      <div>
+        <form onSubmit={agregarEntrada}> 
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Introduzca la entrada a agregar"
+            value={agregarentrada}
+            onChange={(e) => setAgregarEntrada(e.target.value)}
+          />
+        </form>                        
+        <button className={styles.buttonconfirmar} onClick={agregarEntrada} type="submit">Confirmar</button>
+        <button className={styles.buttoncancelar} onClick={handleCancelar1}>Cancelar</button>
+        {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
+      </div>
+    )}
+    {confirmar2 && (
+      <div>
+        <form onSubmit={eliminarEntrada}>
+          <input
+              className={styles.input}
+              type="text"
+              placeholder="Introduzca la entrada a eliminar"
+              value={eliminarentrada}
+              onChange={(e) => setEliminarEntrada(e.target.value)}
+          />
+        </form>                         
+        <button className={styles.buttonconfirmar} onClick={eliminarEntrada} type="submit">Confirmar</button>
+        <button className={styles.buttoncancelar} onClick={handleCancelar2}>Cancelar</button>
+        {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
+      </div>
+    )}
+    <Button 
+      variant="contained" 
+      color="primary" 
+      size="small" 
+      sx={{
+        backgroundColor: 'white', 
+        color: 'black', 
+        '&:hover': {
+          backgroundColor: 'lightgray', 
+        }
+      }}
+    >
+      Actualizar Cambios
+    </Button>
+  </CardActions>
           </Card>
         </Grid>
           </Grid>
@@ -302,4 +335,5 @@ export default function Admin2() {
     </>
   );
 }
+
 
