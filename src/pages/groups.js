@@ -1,5 +1,5 @@
 import { db } from "./firebase";
-import { getDocs, collection, addDoc, getDoc, deleteDoc } from "@firebase/firestore";
+import { getDocs, collection, addDoc, getDoc, deleteDoc, doc } from "@firebase/firestore";
 
 export async function getGroupsArray(){
     const agrupaciones = [];
@@ -10,7 +10,6 @@ export async function getGroupsArray(){
             value: item.data(),
         })
     })
-    console.log(agrupaciones)
     return agrupaciones
 }
 
@@ -45,9 +44,22 @@ export async function getGroup(groupId){
 
 export async function deleteGroupByKey(groupKey) {
     try {
-        const groupRef = collection(db,"agrupacion").doc(groupKey);
-        await deleteDoc(groupRef);
-        alert("Agrupación eliminada satisfactoriamente.");
+        const groupRef = doc(db, 'agrupacion', groupKey);
+        const groupDoc = await getDoc(groupRef);
+        
+        if (!groupDoc.exists()) {
+            alert("La agrupación no existe.");
+            return;
+        }
+
+        const miembros = groupDoc.data().miembros || [];                            // Eliminar agrupación si está vacía a través de su key
+
+        if (miembros.length === 0) {
+            await deleteDoc(groupRef);
+            alert("Agrupación eliminada satisfactoriamente.");
+        } else {
+            alert("Eliminación interrumpida. La agrupación tiene integrantes.");
+        }
     } catch (error) {
         alert("Error al eliminar la agrupación. Detalles del error en consola.");
         console.error('Error al eliminar la agrupación:', error);
