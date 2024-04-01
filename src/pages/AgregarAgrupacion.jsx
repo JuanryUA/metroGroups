@@ -7,6 +7,7 @@ import NavBar from "../layouts/NavBar";
 import Footer from "../layouts/Footer";
 import { useUser } from "../user"; 
 import { validarAdmin } from "./adminvalidation";
+import NavBarAdmin from "../layouts/NavBarAdmin";
 
 export default function AgregarAgrupacion() {
     const navegar = useNavigate();
@@ -97,7 +98,7 @@ export default function AgregarAgrupacion() {
 
     return (
       <>
-      <NavBar />
+      <NavBarAdmin />
         <div className={styles.inicio}>
           <div className={styles.container2}></div>
           <div className={styles.container1}>

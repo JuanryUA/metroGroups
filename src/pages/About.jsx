@@ -119,9 +119,7 @@ export default function About() {
                   ))}
                 </List>
               </CardContent>
-              <CardActions>
-                <Button size="big" sx={{ width: '100%' }}>CREAR AGRUPACIÓN</Button>
-              </CardActions>
+              
             </Card>
           </Grid>
       </Box>
