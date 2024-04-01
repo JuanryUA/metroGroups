@@ -438,20 +438,7 @@ export default function Admin2() {
                     {mensaje && <p className={styles.mensaje}>{mensaje}</p>}
                   </div>
                 )}
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  sx={{
-                    backgroundColor: "white",
-                    color: "black",
-                    "&:hover": {
-                      backgroundColor: "lightgray",
-                    },
-                  }}
-                >
-                  Actualizar Cambios
-                </Button>
+                
               </CardActions>
             </Card>
           </Grid>
