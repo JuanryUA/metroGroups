@@ -10,15 +10,15 @@ import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import AddIcon from '@mui/icons-material/Add';
 import ULogo from "../assets/Logo-footer.png";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../user';
 import { Deslogearse } from '../pages/auth';
 import { getGroupsArray } from '../pages/groups';
 
 const StyledButton = styled(Button)`
-  margin-right: 8px; 
-  background-color: #FDA403;  
+  margin-right: 8px;
+  background-color: #FDA403;
   &:hover {
     background-color: #222831;
   }
@@ -72,8 +72,9 @@ export default function SearchAppBar() {
   const usuario = useUser();
   const [usuarioLogueado, setUsuarioLogueado] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [foundGroup, setFoundGroup] = useState(null);
 
-  useEffect(() =>{
+  useEffect(() => {
     if (usuario) {
       setUsuarioLogueado(true);
     }
@@ -91,26 +92,25 @@ export default function SearchAppBar() {
 
   const handleSearch = async () => {
     let found = false;
-
     const agrupaciones = await getGroupsArray();
 
     for (const agrupacion of agrupaciones) {
       const nombre = agrupacion.value.nombre?.toLowerCase();
       const descripcion = agrupacion.value.descripcion?.toLowerCase();
-  
+
       if (
         (nombre && nombre.includes(searchTerm.trim().toLowerCase())) ||
         (descripcion && descripcion.includes(searchTerm.trim().toLowerCase()))
       ) {
         found = true;
-        break; 
+        setFoundGroup(agrupacion);
+        navegar(`/agrupacion/${agrupacion.key}`); // Redirige a la página de la agrupación encontrada
+        break;
       }
     }
 
-    if (found) {
-      alert('Si existe la agrupacion');
-    } else {
-      alert('No existe');
+    if (!found) {
+      setFoundGroup(null);
     }
   };
 
@@ -119,14 +119,14 @@ export default function SearchAppBar() {
       handleSearch();
     }
   };
-  
+
   return (
     <AppBar position="static">
       <Toolbar sx={{ backgroundColor: "#FFEDD8" }}>
         <Button variant='text' href='/home'>
           <img src={ULogo} alt="my image" />
         </Button>
- 
+
         <Search sx={{ mr: 2, flexGrow: 1 }}>
           <SearchIconWrapper>
             <SearchIcon />
@@ -139,19 +139,28 @@ export default function SearchAppBar() {
           />
         </Search>
         {usuarioLogueado ? (
-        <StyledButton variant="contained" onClick={handleCerrarSesion}>Cerrar Sesión</StyledButton>
-      ) : (
-        <div>
-          <StyledButton variant="contained" onClick={() => navegar('/login', {replace: true})}>Iniciar Sesión</StyledButton>
-          <StyledButton variant="contained" onClick={() => navegar('/register', {replace: true})}>Registrarse</StyledButton>
-        </div>
-      )}
+          <StyledButton variant="contained" onClick={handleCerrarSesion}>Cerrar Sesión</StyledButton>
+        ) : (
+          <div>
+            <StyledButton variant="contained" onClick={() => navegar('/login', { replace: true })}>Iniciar Sesión</StyledButton>
+            <StyledButton variant="contained" onClick={() => navegar('/register', { replace: true })}>Registrarse</StyledButton>
+          </div>
+        )}
         <IconButton aria-label="user" sx={{ mr: 2 }}>
           <Link to="/profile" style={{ textDecoration: 'none' }}>
             <Avatar>U</Avatar>
           </Link>
         </IconButton>
       </Toolbar>
+      {foundGroup && (
+        <div>
+          {/* Mostrar detalles de la agrupación encontrada */}
+          <Typography variant="h6">{foundGroup.value.nombre}</Typography>
+          <Typography variant="body1">{foundGroup.value.descripcion}</Typography>
+          {/* Añade aquí más detalles según tus necesidades */}
+        </div>
+      )}
     </AppBar>
   );
 }
+

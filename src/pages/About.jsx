@@ -8,6 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Avatar from '@mui/material/Avatar';
 import { Link } from "react-router-dom";
 import './About.css';
+import { db } from './firebase.js';
 
 const StyledListItemText = styled('div')`
   text-align: center;
@@ -20,14 +21,6 @@ const StyledCardMedia = styled(CardMedia)`
 const StyledCardContent = styled(CardContent)`
   justify-content: center;
   height: auto;
-`;
-
-const StyledButton = styled(Button)`
-  margin-right: 8px; 
-  background-color: #FDA403;  
-  &:hover {
-    background-color: #222831;
-  }
 `;
 
 
@@ -127,7 +120,6 @@ export default function About() {
                   ))}
                 </List>
               </CardContent>
-
             </Card>
           </Grid>
       </Box>
